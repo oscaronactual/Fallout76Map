@@ -1,15 +1,39 @@
 {
-    "name": "Fallout76Map",
-    "displayName": "Fallout76 Map",
-    "version": "1.0.0",
-    "description": "In-game map from Fallout 76",
-    "main": "index.js",
-    "scripts": {
-        "test": "echo \"Error: no test specified\" && exit 1",
-        "build": "npm run copy:angular",
-        "copy:angular": "copyfiles -f node_modules/angular/angular.min.js www/dist"
+  "name": "Fallout76Map",
+  "displayName": "Fallout76 Map",
+  "version": "1.0.0",
+  "description": "In-game map from Fallout 76",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "npm run copy:angular && npm run copy:leaflet && npm run copy:leafletImages && npm run copy:leafletCss && npm run copy:cordova && npm run copy:leafletUi && npm run copy:simpleLogger && npm run copy:ui-bootstrap && npm run copy:ui-bootstrapCss && npm run copy:ui-bootstrapTemplates",
+    "copy:angular": "copyfiles -f node_modules/angular/angular.min.js www/dist",
+    "copy:leaflet": "copyfiles -f node_modules/leaflet/dist/leaflet.js www/dist",
+    "copy:leafletImages": "copyfiles -f node_modules/leaflet/dist/images/*.png www/dist/images",
+    "copy:leafletCss": "copyfiles -f node_modules/leaflet/dist/leaflet.css www/dist",
+    "copy:cordova": "copyfiles -f node_modules/cordova/cordova.js www",
+    "copy:leafletUi": "copyfiles -f node_modules/ui-leaflet/dist/ui-leaflet.js www/dist",
+    "copy:simpleLogger": "copyfiles -f node_modules/angular-simple-logger/dist/angular-simple-logger.min.js www/dist",
+    "copy:ui-bootstrap": "copyfiles -f node_modules/angular-ui-bootstrap/dist/ui-bootstrap.js www/dist",
+    "copy:ui-bootstrapCss": "copyfiles -f node_modules/angular-ui-bootstrap/dist/ui-bootstrap-csp.css www/dist",
+    "copy:ui-bootstrapTemplates": "copyfiles -f node_modules/angular-ui-bootstrap/dist/ui-bootstrap-tpls.js www/dist",
+    "start": "node server.js "
+  },
+  "author": "VGIS",
+  "license": "Apache-2.0",
+  "dependencies": {
+    "cordova-android": "^7.1.1",
+    "cordova-browser": "^5.0.4",
+    "cordova-plugin-whitelist": "^1.3.3",
+    "express": "^4.16.4"
+  },
+  "cordova": {
+    "plugins": {
+      "cordova-plugin-whitelist": {}
     },
-    "author": "VGIS",
-    "license": "Apache-2.0"
+    "platforms": [
+      "android",
+      "browser"
+    ]
+  }
 }
-

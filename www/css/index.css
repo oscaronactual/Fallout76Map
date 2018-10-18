@@ -113,3 +113,15 @@ h1 {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
 }
+
+#falloutMap{
+    height:1000px;
+}
+
+html, .full-height{
+    height:100%;
+}
+.mapoverlay{
+    position: absolute;
+    top:0;
+}
