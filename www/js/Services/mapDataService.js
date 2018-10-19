@@ -8,6 +8,32 @@ falloutApp.factory('mapDataService', ['$http',
         var namedGroups={};
         var latestUpdate;
 
+       function addPoint(point){
+
+           $http.post('https://falloutmaps.azurewebsites.net/api/falloutpoints', point, {responseType:"json"})
+               .then(function(response){
+
+               })
+               .then(function(response){
+
+               });
+
+       }
+       function deletePoint(){}
+       function updatePoint(){}
+
+       function addCategory(){}
+       function deleteCategory(){}
+       function updateCategory(){}
+
+       function addGroup(){}
+       function deleteGroup(){}
+       function updateGroup(){}
+
+       function addMarker(){}
+       function deleteMarker(){}
+       function updateMarker(){}
+
         return {
             initializePoints: function(callback){
                 $http.get('https://falloutmaps.azurewebsites.net/api/falloutpoints', {
