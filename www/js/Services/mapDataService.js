@@ -27,15 +27,22 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                $http.post(settings.apiUrl + settings.mapPointsEndpoint, payload)
                .then(function(response){
                    var newPoint = response.data;
-
-                   newPoint.layer = groupsLookup[item.GroupId].GroupName;
-                   item.icon = {
-                       iconUrl: '/markers/' + markersLookup[item.MarkerId].IconUrl,
+                   newPoint.title = newPoint.PointName;
+                   newPoint.lat = newPoint.LatCoord;
+                   newPoint.lng = newPoint.LongCoord;
+                   newPoint.draggable = true;
+                   newPoint.layer = groupsLookup[newPoint.GroupId].GroupName;
+                   newPoint.icon = {
+                       iconUrl: '/markers/' + markersLookup[newPoint.MarkerId].IconUrl,
                        iconSize: [36,36],
                        iconAnchor: [18,18],
                        popupAnchor: [-3, -76]
                    };
-                    callback();
+                   pointLookup[newPoint.Id] = newPoint;
+                   groupsLookup[newPoint.GroupId].Points.push(pointLookup[newPoint.Id]);
+                   pointsUngrouped.push(pointLookup[newPoint.Id]);
+
+                   callback();
                })
                .then(function(response){
 
