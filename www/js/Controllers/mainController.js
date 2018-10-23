@@ -34,8 +34,8 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
                     xyz: {
                         name: 'Fallout76 MapTiles',
                         url: 'http://d2upr4z2n1fxid.cloudfront.net/{z}/{x}/{y}.png',
-                        options:{
-                            errorTileUrl: 'img/tiles/emptyTile.png',
+                        layerParams:{
+                            errorTileUrl: 'https://s3-us-west-1.amazonaws.com/fallout76maptiles/emptyTile.png',
                             noWrap: true
                         },
                         type: 'xyz'
