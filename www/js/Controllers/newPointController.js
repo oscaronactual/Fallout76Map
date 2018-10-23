@@ -6,7 +6,7 @@ falloutApp.controller('newPointController', ['$uibModalInstance', 'location', 'm
     $ctrl.description = '';
     $ctrl.markerId = 0;
     $ctrl.groupId = 0;
-    $ctrl.groups = mapDataService.namedGroups;
+    $ctrl.groups = mapDataService.groupsLookup;
     $ctrl.markers = mapDataService.markersLookup;
     $ctrl.iconUrl = function(){
         var marker = $ctrl.markers[$ctrl.markerId];
