@@ -148,3 +148,24 @@ html, .full-height{
 .box .rowLocal.footer {
     flex: 0 1 40px;
 }
+
+.toaster{
+    position: absolute;
+    top: 50px;
+    z-index: 1000;
+    width: 350px;
+    left: 350px;
+}
+
+.leaflet-container {
+    background: #000 !important;
+    outline: 0;
+}
+
+.navbar {
+    margin-bottom: 0px !important;
+}
+
+.leaflet-control-layers{
+    display:none !important;
+}
