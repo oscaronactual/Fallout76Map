@@ -12,9 +12,7 @@
         <link rel="stylesheet" href="dist/ui-bootstrap-csp.css">
         <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-        <script src="dist/angular.js"></script>
-        <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal.min.js"></script>
-        <script src="https://secure.aadcdn.microsoftonline-p.com/lib/1.0.17/js/adal-angular.min.js"></script>
+        <script src="dist/angular.min.js"></script>
         <script src="dist/leaflet.js"></script>
         <script src="dist/angular-simple-logger.min.js"></script>
         <script src="dist/ui-leaflet.js"></script>
@@ -50,7 +48,7 @@
                             <a class="" ng-click="showMarkers()" href="#">Markers<span class="sr-only">(current)</span></a>
                         </li>
                         <li class="">
-                            <a class="" href="#" ng-click="login()">Sign-in<span class="sr-only">(current)</span></a>
+                            <a class="" href="https://localhost:44329/api/home/signin">Sign-in<span class="sr-only">(current)</span></a>
                         </li>
                     </ul>
                 </div>
@@ -384,7 +382,6 @@
             <script type="text/ng-template" id="alert.html">
                 <div ng-transclude></div>
             </script>
-<!--            <script type="text/ng-template" id="login.html"></script>-->
 
         </div>
     </body>

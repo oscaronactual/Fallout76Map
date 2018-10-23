@@ -1,4 +1,4 @@
-falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leafletMapEvents', 'mapDataService','$uibModal','$log', 'adalAuthenticationService', function($scope, leafletBoundsHelpers,leafletMapEvents, mapDataService, $uibModal, $log, adalAuthenticationService) {
+falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leafletMapEvents', 'mapDataService','$uibModal','$log', function($scope, leafletBoundsHelpers,leafletMapEvents, mapDataService, $uibModal, $log) {
     $scope.initialize = function(){
         $scope.alerts = [];
         $scope.addAlert = function(message) {
@@ -175,12 +175,5 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
             controllerAs: '$ctrl',
             size: "md"
         });
-    };
-
-    $scope.login = function () {
-        adalAuthenticationService.login();
-    };
-    $scope.logout = function () {
-        adalAuthenticationService.logOut();
     };
 }]);
