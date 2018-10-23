@@ -4,6 +4,6 @@ const port = 3000;
 
 app.use('/',express.static('www'));
 
-//app.get('/', (req, res) => res.send('index.html'));
+//app.get('/', (req, res) => res.send('edit_adminz_1337_5TUFF.html'));
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`));
