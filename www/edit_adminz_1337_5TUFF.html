@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html ng-app="falloutApp">
+    <head>
+        <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;"> -->
+        <meta name="format-detection" content="telephone=no">
+        <meta name="msapplication-tap-highlight" content="no">
+        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
+        <link rel="stylesheet" type="text/css" href="css/index.css">
+        <link rel="stylesheet" href="dist/leaflet.css">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <link rel="stylesheet" href="dist/ui-bootstrap-csp.css">
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+        <script src="dist/angular.min.js"></script>
+        <script src="dist/leaflet.js"></script>
+        <script src="dist/angular-simple-logger.min.js"></script>
+        <script src="dist/ui-leaflet.js"></script>
+        <!--        <script src="dist/ui-leaflet.min.js"></script>-->
+        <script src="dist/ui-bootstrap.js"></script>
+        <script src="dist/ui-bootstrap-tpls.js"></script>
+        <script src="js/app.js"></script>
+        <script src="js/constants.js"></script>
+        <script src="js/Services/mapDataService.js"></script>
+        <script src="js/Controllers/mainController.js"></script>
+        <script src="js/Controllers/newPointController.js"></script>
+        <script src="js/Controllers/editDeletePointController.js"></script>
+        <script src="js/Controllers/categoriesController.js"></script>
+        <script src="js/Controllers/markersController.js"></script>
+        <script src="js/Controllers/groupsController.js"></script>
+        <!-- <script type="text/javascript" src="cordova.js"></script>
+        <script type="text/javascript" src="js/index.js"></script> -->
+        <title>Hello World</title>
+    </head>
+    <body>
+        <div ng-controller="mainController" class="full-height box mainController">
+            <nav class="navbar navbar-default navbar-inverse rowLocal header">
+                <a class="navbar-brand" href="#">Fallout76 Map</a>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="nav navbar-nav">
+                        <li class="">
+                            <a class="" ng-click="showCategories()" href="#">Categories<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="">
+                            <a class="" ng-click="showGroups()" href="#">Groups<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="">
+                            <a class="" ng-click="showMarkers()" href="#">Markers<span class="sr-only">(current)</span></a>
+                        </li>
+                        <li class="">
+                            <a class="" href="https://localhost:44329/api/home/signin">Sign-in<span class="sr-only">(current)</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <div class="toaster">
+                <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
+            </div>
+            <leaflet class="rowLocal content" width="100%" height="100%" layers="layers" markers="markers" maxbounds="maxbounds" lf-center="center"></leaflet>
+            <script type="text/ng-template" id="newPoint.html">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Add Point</h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                   <form>
+                       <div class="form-group">
+                           <label for="pointName">Point Name</label>
+                           <input type="text" class="form-control" id="pointName" ng-model="$ctrl.pointName" placeholder="My Point">
+                       </div>
+                       <div class="form-group">
+                           <label for="pointLink">Link</label>
+                           <input type="text" class="form-control" id="pointLink" ng-model="$ctrl.link" placeholder="http://fallout76wiki.com/MyPoint">
+                       </div>
+                       <div class="form-group">
+                           <label for="pointDescription">Description</label>
+                           <input type="text" class="form-control" id="pointDescription" ng-model="$ctrl.description" placeholder="Starting location, perk cards, etc">
+                       </div>
+                       <div class="form-group">
+                           <label for="category">Group</label>
+                           <select name="category" ng-model="$ctrl.groupId">
+                               <option ng-repeat="group in $ctrl.groups" value="{{group.Id}}">{{group.GroupName}}</option>
+                           </select>
+                       </div>
+                       <div class="form-group">
+                           <label for="markerIcon">Marker Icon</label>
+                           <select name="markerIcon" ng-model="$ctrl.markerId">
+                               <option ng-repeat="marker in $ctrl.markers" value="{{marker.Id}}">{{marker.MarkerName}}</option>
+                           </select>
+                       </div>
+                       <div class="form-group">
+                           <img ng-src="{{$ctrl.iconUrl()}}"/>
+                       </div>
+                   </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Create</button>
+                    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                </div>
+            </script>
+            <script type="text/ng-template" id="editDeletePoint.html">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Edit/Delete Point</h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="pointName">Point Name</label>
+                            <input type="text" class="form-control" id="pointName" ng-model="$ctrl.pointName" placeholder="My Point">
+                        </div>
+                        <div class="form-group">
+                            <label for="pointDescription">Description</label>
+                            <input type="text" class="form-control" id="pointDescription" ng-model="$ctrl.description" placeholder="Starting Location, crap loot, perk cards, etc">
+                        </div>
+                        <div class="form-group">
+                            <label for="pointLink">Link</label>
+                            <input type="text" class="form-control" id="pointLink" ng-model="$ctrl.link" placeholder="http://fallout76wiki.com/MyPoint">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-danger left" type="button" ng-click="$ctrl.delete()">Delete</button>
+                    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+                    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                </div>
+            </script>
+            <script type="text/ng-template" id="showCategories.html">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Add/Edit/Delete Categories</h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <table width="100%">
+                        <thead>
+                            <tr>
+                                <th width="60%">Category Name</th>
+                                <th width="40%">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="category in $ctrl.categories">
+                                <td>{{category.CategoryName}}</td>
+                                <td>
+                                    <a href="#" ng-click="$ctrl.updateCategory(category)">Update</a> | <a href="#" ng-click="$ctrl.deleteCategory(category)">Delete</a>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <a href="#" ng-click="$ctrl.newCategory('.categoryParentModal')">New Category</a>
+                    <div class="categoryParentModal">
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+                </div>
+            </script>
+            <script type="text/ng-template" id="newCategory.html">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Add Category</h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="categoryName">Category Name</label>
+                            <input type="text" class="form-control" id="categoryName" ng-model="$ctrl.categoryName" placeholder="Landmarks">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Create</button>
+                    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                </div>
+            </script>
+            <script type="text/ng-template" id="updateCategory.html">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Update Category</h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="categoryName">Category Name</label>
+                            <input type="text" class="form-control" id="categoryName" ng-model="$ctrl.categoryName" placeholder="Landmarks">
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Update</button>
+                    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                </div>
+            </script>
+            <script type="text/ng-template" id="deleteCategory.html">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Delete Category</h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    Are you absolutely sure you wish to delete the {{$ctrl.categoryName}} category?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Delete</button>
+                    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                </div>
+            </script>
+            <script type="text/ng-template" id="showMarkers.html">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Add/Edit/Delete Categories</h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <table width="100%">
+                        <thead>
+                        <tr>
+                            <th width="10%">Marker Icon</th>
+                            <th width="50%">Marker Name</th>
+                            <th width="40%">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="marker in $ctrl.markers">
+                            <td><img ng-src="{{$ctrl.markerIcon(marker)}}"/></td>
+                            <td>{{marker.MarkerName}}</td>
+                            <td>
+                                <a href="#" ng-click="$ctrl.updateMarker(marker)">Update</a> | <a href="#" ng-click="$ctrl.deleteMarker(marker)">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a href="#" ng-click="$ctrl.newMarker()">New Marker</a>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+                </div>
+            </script>
+            <script type="text/ng-template" id="newMarker.html">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Update Marker</h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="markerName">Marker Name</label>
+                            <input type="text" class="form-control" id="markerName" ng-model="$ctrl.markerName" placeholder="Vaults">
+                        </div>
+                        <div class="form-group">
+                            <label for="markerIcon">Marker Icon</label>
+                            <input type="text" class="form-control" id="markerIcon" ng-model="$ctrl.iconUrl" placeholder="markerIcon.png">
+                        </div>
+                        <div class="form-group">
+                            <img ng-src="{{$ctrl.getIcon()}}"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Update</button>
+                    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                </div>
+            </script>
+            <script type="text/ng-template" id="updateMarker.html">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Update Marker</h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="markerName">Marker Name</label>
+                            <input type="text" class="form-control" id="markerName" ng-model="$ctrl.markerName" placeholder="Vaults">
+                        </div>
+                        <div class="form-group">
+                            <label for="markerIcon">Marker Icon</label>
+                            <input type="text" class="form-control" id="markerIcon" ng-model="$ctrl.iconUrl" placeholder="markerIcon.png">
+                        </div>
+                        <div class="form-group">
+                            <img ng-src="{{$ctrl.getIcon()}}"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Update</button>
+                    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                </div>
+            </script>
+            <script type="text/ng-template" id="deleteMarker.html">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Delete Marker</h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    Are you absolutely sure you wish to delete the {{$ctrl.markerName}} Marker?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Delete</button>
+                    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                </div>
+            </script>
+            <script type="text/ng-template" id="showGroups.html">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Groups</h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <table width="100%">
+                        <thead>
+                        <tr>
+                            <th width="10%">Marker Icon</th>
+                            <th width="25%">Group Name</th>
+                            <th width="25%">Category Name</th>
+                            <th width="40%">Actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="group in $ctrl.groups">
+                            <td><img ng-src="{{$ctrl.markerIcon(group)}}"/></td>
+                            <td>{{group.GroupName}}</td>
+                            <td>{{$ctrl.getCategoryName(group)}}</td>
+                            <td>
+                                <a href="#" ng-click="$ctrl.updateGroup(group)">Update</a> | <a href="#" ng-click="$ctrl.deleteGroup(group)">Delete</a>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                    <a href="#" ng-click="$ctrl.newGroup()">New Group</a>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
+                </div>
+            </script>
+            <script type="text/ng-template" id="newGroup.html">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">New Group</h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="markerName">Group Name</label>
+                            <input type="text" class="form-control" id="markerName" ng-model="$ctrl.groupName" placeholder="Vaults">
+                        </div>
+                        <div class="form-group">
+                            <label for="markerIcon">Marker Icon</label>
+                            <select name="markerIcon" ng-model="$ctrl.markerId">
+                                <option ng-repeat="marker in $ctrl.Markers" value="{{marker.Id}}">{{marker.MarkerName}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select name="category" ng-model="$ctrl.categoryId">
+                                <option ng-repeat="category in $ctrl.Categories" value="{{category.Id}}">{{category.CategoryName}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <img ng-src="{{$ctrl.getIcon()}}"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Create</button>
+                    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                </div>
+            </script>
+            <script type="text/ng-template" id="updateGroup.html">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Update Group</h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    <form>
+                        <div class="form-group">
+                            <label for="markerName">Group Name</label>
+                            <input type="text" class="form-control" id="markerName" ng-model="$ctrl.groupName" placeholder="Vaults">
+                        </div>
+                        <div class="form-group">
+                            <label for="markerIcon">Marker Icon</label>
+                            <select name="markerIcon" ng-model="$ctrl.markerId">
+                                <option ng-repeat="marker in $ctrl.Markers" value="{{marker.Id}}">{{marker.MarkerName}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="category">Category</label>
+                            <select name="category" ng-model="$ctrl.categoryId">
+                                <option ng-repeat="category in $ctrl.Categories" value="{{category.Id}}">{{category.CategoryName}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <img ng-src="{{$ctrl.getIcon()}}"/>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Update</button>
+                    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                </div>
+            </script>
+            <script type="text/ng-template" id="alert.html">
+                <div ng-transclude></div>
+            </script>
+
+        </div>
+    </body>
+</html>
