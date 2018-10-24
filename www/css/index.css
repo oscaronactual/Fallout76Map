@@ -171,5 +171,18 @@ html, .full-height{
 }
 
 .leaflet-tooltip{
+    text-align: center;
+    font-family: "Roboto Condensed";
+    font-weight: normal;
+    font-size: 14pt;
+    color: rgba(255, 255, 221, 1.0);
+    text-shadow: 3px 3px 5px #000, 0px 0px 5px #000, -1px -1px 5px #000;
+}
 
+.accordionContainer{
+    position: absolute;
+    top:100px;
+    left: 100px;
+    width: 200px;
+    z-index: 1000;
 }
