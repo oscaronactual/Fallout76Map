@@ -1,4 +1,4 @@
-falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leafletMapEvents', 'mapDataService', function($scope, leafletBoundsHelpers,leafletMapEvents, mapDataService) {
+falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leafletMapEvents', 'mapDataService', 'leafletData','$log', function($scope, leafletBoundsHelpers,leafletMapEvents, mapDataService, leafletData, $log) {
     $scope.initialize = function(){
 
         mapDataService.initializePoints(initializePointLayer);
@@ -53,4 +53,16 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
          }
     };
     $scope.initialize();
+
+    leafletData.getMap().then(function(map){
+        map.on("layeradd", function(layer){
+            if(layer.layer.dragging){//Its a marker
+                layer.layer.bindTooltip(layer.layer.options.PointName,{
+                    direction: 'bottom',
+                    offset: L.point(0, 15)
+                })
+            }
+        });
+    });
+
 }]);

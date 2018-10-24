@@ -41,7 +41,7 @@ body {
     height:100%;
     margin:0px;
     padding:0px;
-    text-transform:uppercase;
+/*    text-transform:uppercase;*/
     width:100%;
 }
 
@@ -168,4 +168,8 @@ html, .full-height{
 
 .leaflet-control-layers{
     display:none !important;
+}
+
+.leaflet-tooltip{
+
 }

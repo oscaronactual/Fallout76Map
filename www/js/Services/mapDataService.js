@@ -99,7 +99,7 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings',
                                pointLookup[item.Id] = item;
                                groupsLookup[item.GroupId].Points.push(pointLookup[item.Id]);
                                pointsUngrouped.push(pointLookup[item.Id]);
-                               item.title = item.PointName;
+                               //item.title = item.PointName;
                                item.lat = item.LatCoord;
                                item.lng = item.LongCoord;
                                item.draggable = true;
@@ -153,7 +153,7 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings',
                             pointLookup[item.Id] = item;
                             groupsLookup[item.GroupId].Points.push(pointLookup[item.Id]);
                             pointsUngrouped.push(pointLookup[item.Id]);
-                            item.title = item.PointName;
+                            //item.title = item.PointName;
                             item.lat = item.LatCoord;
                             item.lng = item.LongCoord;
                             item.draggable = true;
