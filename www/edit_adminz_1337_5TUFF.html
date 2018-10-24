@@ -108,15 +108,19 @@
                             <input type="text" class="form-control" id="pointName" ng-model="$ctrl.pointName" placeholder="My Point">
                         </div>
                         <div class="form-group">
+                            <label for="pointDescription">Description</label>
+                            <input type="text" class="form-control" id="pointDescription" ng-model="$ctrl.description" placeholder="Starting Location, crap loot, perk cards, etc">
+                        </div>
+                        <div class="form-group">
                             <label for="pointLink">Link</label>
                             <input type="text" class="form-control" id="pointLink" ng-model="$ctrl.link" placeholder="http://fallout76wiki.com/MyPoint">
                         </div>
                     </form>
                 </div>
                 <div class="modal-footer">
+                    <button class="btn btn-danger left" type="button" ng-click="$ctrl.delete()">Delete</button>
                     <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">OK</button>
                     <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
-                    <button class="btn btn-danger" type="button" ng-click="$ctrl.delete()">Delete</button>
                 </div>
             </script>
             <script type="text/ng-template" id="showCategories.html">

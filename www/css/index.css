@@ -169,3 +169,7 @@ html, .full-height{
 .leaflet-control-layers{
     display:none !important;
 }
+
+.left {
+    float:left;
+}
