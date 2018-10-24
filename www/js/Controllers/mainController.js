@@ -80,9 +80,7 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
             });
         };
 
-        $scope.editPoint = function (point, parentSelector) {
-            var parentElem = parentSelector ?
-                angular.element($document[0].querySelector('.mainController ' + parentSelector)) : undefined;
+        $scope.editPoint = function (point) {
             var modalInstance = $uibModal.open({
                 animation: true,
                 ariaLabelledBy: 'modal-title',
@@ -91,22 +89,11 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
                 controller: 'editDeletePointController',
                 controllerAs: '$ctrl',
                 size: "md",
-                appendTo: parentElem,
                 resolve: {
                     pointspec: function () {
                         return point;
                     }
                 }
-            });
-
-            modalInstance.result.then(function (editPointDefinition) {
-                if(editPointDefinition.delete){
-                    mapDataService.deletePoint(editPointDefinition);
-                }else{
-                    mapDataService.updatePoint(editPointDefinition);
-                }
-            }, function () {
-                $log.info('Modal dismissed at: ' + new Date());
             });
         };
 

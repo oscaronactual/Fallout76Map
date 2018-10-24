@@ -65,33 +65,45 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                LongCoord: point.lng,
                Link: point.link,
                Description: point.description,
-               GroupId: '608b5daa-d3d0-e811-af11-0004ffb16d2f',
-               MarkerId: 'A5CE8943-1CD1-E811-AF11-0004FFB16D2F'
+               GroupId: point.GroupId,
+               MarkerId: point.MarkerId
            };
            $http.put(settings.apiUrl + settings.mapPointsEndpoint + point.pointId, payload)
                .then(function(response){
-                   if(response.data === ""){
-                        var pointToUpdate = pointLookup[point.pointId];
-                        pointToUpdate.PointName = point.PointName;
-                        pointToUpdate.LatCoord = point.lat;
-                        pointToUpdate.LongCoord = point.lng;
-                        pointToUpdate.Link = point.link;
-                        pointToUpdate.Description = point.description;
-                        pointToUpdate.GroupId = point.GroupId;
-                        pointToUpdate.MarkerId = point.MarkerId;
-                        pointToUpdate.title = point.PointName;
-                        pointToUpdate.lat = point.lat;
-                        pointToUpdate.lng = point.lng;
-                        pointToUpdate.layer = groupsLookup[point.GroupId].GroupName;
-                            pointToUpdate.icon = {
-                            iconUrl: 'markers/' + markersLookup[point.MarkerId].IconUrl,
-                            iconSize: [38, 95],
-                            iconAnchor: [22, 94],
-                            popupAnchor: [-3, -76]
-                            }
+                   if(response.data === ""){ //api returns empty set when successful
+                       var lookupPoint = pointLookup[point.pointId];
+                       var groupPoint = groupsLookup[point.GroupId].Points.find(function(element){
+                           return element.Id === point.pointId;
+                       });
+                       var ungroupPoint = pointsUngrouped.find(function(element){
+                           return element.Id === point.pointId;
+                       });
+                       copyPointVals(lookupPoint, point);
+                       copyPointVals(groupPoint, point);
+                       copyPointVals(ungroupPoint, point);
                    }
                })
                .then(function(response){});
+       }
+
+       function copyPointVals(oldPoint, newPoint){
+           oldPoint.PointName = newPoint.PointName;
+           oldPoint.LatCoord = newPoint.lat;
+           oldPoint.LongCoord = newPoint.lng;
+           oldPoint.Link = newPoint.link;
+           oldPoint.Description = newPoint.description;
+           oldPoint.GroupId = newPoint.GroupId;
+           oldPoint.MarkerId = newPoint.MarkerId;
+           oldPoint.title = newPoint.PointName;
+           oldPoint.lat = newPoint.lat;
+           oldPoint.lng = newPoint.lng;
+           oldPoint.layer = groupsLookup[newPoint.GroupId].GroupName;
+           oldPoint.icon = {
+               iconUrl: 'markers/' + markersLookup[newPoint.MarkerId].IconUrl,
+               iconSize: [36,36],
+               iconAnchor: [18,18],
+               popupAnchor: [-3, -76]
+           }
        }
 
        function addCategory(categoryname){
