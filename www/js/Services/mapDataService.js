@@ -70,8 +70,7 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
            };
            $http.put(settings.apiUrl + settings.mapPointsEndpoint + point.pointId, payload)
                .then(function(response){
-                   if(response.data === ""){
-
+                   if(response.data === ""){ //api returns empty set when successful
                        var lookupPoint = pointLookup[point.pointId];
                        var groupPoint = groupsLookup[point.GroupId].Points.find(function(element){
                            return element.Id === point.pointId;
