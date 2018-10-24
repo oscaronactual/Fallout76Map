@@ -186,3 +186,12 @@ html, .full-height{
     width: 200px;
     z-index: 1000;
 }
+
+.categoryHeading{
+    border-radius: 0 !important;
+    border:none !important;
+    background-color: #222 !important;
+    color: #FFFFFF !important;
+}
+
+.
