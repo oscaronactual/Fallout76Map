@@ -1,5 +1,5 @@
-falloutApp.factory('mapDataService', ['$http', '$timeout',
-   function($http, $timeout){
+falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings',
+   function($http, $timeout, settings){
        var pointsGrouped = [];
        var pointsUngrouped = [];
        var categoriesLookup = {};
