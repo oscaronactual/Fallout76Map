@@ -276,9 +276,10 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                if(categoriesLookup[item.Id]){
                                    var cat = categoriesLookup[item.Id];
                                    if(cat.ModifiedDate < item.ModifiedDate){
-                                       categoriesLookup[item.Id] = item;
+                                       cat.CategoryName = item.CategoryName;
                                    }
                                }else{
+                                   addAccordionPropertiesToCategory(item);
                                    categoriesLookup[item.Id] = item;
                                    categoryList.push(item);
                                }
@@ -291,7 +292,7 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                    }
                                }else{
                                    markersLookup[item.Id] = item;
-                                   item.iconUrl='img/leaf-green.png';
+                                   item.iconUrl= settings.markerUrl + markersLookup[item.MarkerId].IconUrl;
                                    item.iconSize = [38, 95];
                                    item.iconAnchor= [22, 94];
                                    item.popupAnchor= [-3, -76];
@@ -329,17 +330,20 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                            });
                            response.data.Points.forEach(function(item, index, array){
                                if(groupsLookup[item.GroupId]){
-                                   var point = groupsLookup[item.GroupId];
+                                   var group = groupsLookup[item.GroupId];
+                                   var point = group.Points.find(function(element){
+                                       return element.Id === item.Id;
+                                   });
                                    if(point.ModifiedDate < item.ModifiedDate){
                                        pointLookup[item.Id] = item;
                                        item.Marker = markersLookup[item.MarkerId];
-                                       item.title = item.PointName;
+                                       //item.title = item.PointName;
                                        item.lat = item.LatCoord;
                                        item.lng = item.LongCoord;
                                        item.draggable = true;
                                        item.layer = groupsLookup[item.GroupId].GroupName;
                                        item.icon = {
-                                           iconUrl: 'img/leaf-green.png',
+                                           iconUrl: settings.markerUrl + markersLookup[item.MarkerId].IconUrl,
                                            iconSize: [36,36],
                                            iconAnchor: [18,18],
                                            popupAnchor: [-3, -76]
@@ -348,7 +352,7 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                }else{
 
                                }
-                               pointLookup[item.Id] = item;
+                               /*pointLookup[item.Id] = item;
                                groupsLookup[item.GroupId].Points.push(pointLookup[item.Id]);
                                pointsUngrouped.push(pointLookup[item.Id]);
                                item.title = item.PointName;
@@ -362,13 +366,19 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                    iconAnchor: [18,18],
                                    popupAnchor: [-3, -76]
                                };
-                               item.Marker = markersLookup[item.MarkerId];
+                               item.Marker = markersLookup[item.MarkerId];*/
                            });
                        }).then(function(response){
 
                    });
                    poll();
                }, 30000);
+       }
+
+       function addAccordionPropertiesToCategory(category){
+           category.isOpen = false;
+           category.isHovered = false;
+           category.Groups = [];
        }
 
         return {
@@ -379,13 +389,14 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                     .then(function(response){
                         response.data.Categories.forEach(function(item, index, array){
                             item.groups = [];
+                            addAccordionPropertiesToCategory(item);
                             categoriesLookup[item.Id] = item;
                             categoryList.push(categoriesLookup[item.Id]);
                         });
                         response.data.Markers.forEach(function(item, index, array){
                             markersLookup[item.Id] = item;
                             markerList.push(item);
-                            item.iconUrl='/markers/' + item.IconUrl;
+                            item.iconUrl= settings.markerUrl + item.IconUrl;
                             item.iconSize = [38, 95];
                               item.popupAnchor= [-3, -76];
                             //shadowUrl: 'img/leaf-shadow.png',
@@ -393,7 +404,8 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                             //shadowAnchor: [4, 62],  // the same for the shadow
                         });
                         response.data.Groups.forEach(function(item, index, array){
-                            item.name= item.GroupName;
+                            var category = categoriesLookup[item.CategoryId];
+                            //item.name= item.GroupName;
                             item.type= 'group';
                             item.visible= true;
                             item.Points = [];
@@ -401,6 +413,7 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                             groupsLookup[item.Id] = item;
                             namedGroups[item.GroupName] = item;
                             pointsGrouped.push(item);
+                            category.Groups.push(item);
                         });
                         response.data.Points.forEach(function(item, index, array){
                             pointLookup[item.Id] = item;
@@ -412,7 +425,7 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                             item.draggable = true;
                             item.layer = groupsLookup[item.GroupId].GroupName;
                             item.icon = {
-                                iconUrl: '/markers/' + markersLookup[item.MarkerId].IconUrl,
+                                iconUrl: settings.markerUrl + markersLookup[item.MarkerId].IconUrl,
                                 iconSize: [36,36],
                                 iconAnchor: [18,18],
                                 popupAnchor: [-3, -76]

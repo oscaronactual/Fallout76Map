@@ -1,6 +1,6 @@
-falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leafletMapEvents', 'mapDataService','$uibModal','$log', function($scope, leafletBoundsHelpers,leafletMapEvents, mapDataService, $uibModal, $log) {
+falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leafletMapEvents', 'mapDataService','$uibModal', 'leafletData','$log', 'settings', function($scope, leafletBoundsHelpers,leafletMapEvents, mapDataService, $uibModal, leafletData, $log, settings) {
     $scope.initialize = function(){
-        $scope.alerts = [];
+            $scope.alerts = [];
         $scope.addAlert = function(message) {
             $scope.alerts.push({msg: message, "dismiss-on-timeout": 2000, "template-url": "alert.html"});
         };
@@ -128,6 +128,28 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
          }
     };
     $scope.initialize();
+
+    leafletData.getMap().then(function(map){
+        map.on("layeradd", function(layer){
+            if(layer.layer.dragging){//Its a marker
+                layer.layer.bindTooltip(layer.layer.options.PointName,{
+                    direction: 'bottom',
+                    offset: L.point(0, 15)
+                })
+            }
+        });
+    });
+
+    $scope.categories = mapDataService.categories;
+    $scope.getMarkerUrl = function(marker){
+        return settings.markerUrl + marker.IconUrl;
+    };
+
+    $scope.setGroupStates = function(group){
+        group.visible = !group.visible;
+        this.layers.overlays[group.GroupName].visible = group.visible;
+    };
+
     $scope.showCategories = function(){
         var modalInstance = $uibModal.open({
             animation: true,
