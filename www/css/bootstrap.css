@@ -5306,9 +5306,9 @@ fieldset[disabled] .navbar-inverse .btn-link:focus {
     border-radius: 6px;
     -webkit-box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
     box-shadow: 0 3px 9px rgba(0, 0, 0, 0.5);
-    -webkit-background-clip: padding-box;
-    background-clip: padding-box;
-    outline: 0;
+-webkit-background-clip: padding-box;
+background-clip: padding-box;
+outline: 0;
 }
 .modal-backdrop {
     position: fixed;
