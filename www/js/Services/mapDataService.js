@@ -78,7 +78,10 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings',
                            });
                            response.data.Points.forEach(function(item, index, array){
                                if(groupsLookup[item.GroupId]){
-                                   var point = groupsLookup[item.GroupId];
+                                   var group = groupsLookup[item.GroupId];
+                                   var point = group.Points.find(function(element){
+                                        return element.Id === item.Id;
+                                   });
                                    if(point.ModifiedDate < item.ModifiedDate){
                                        pointLookup[item.Id] = item;
                                        item.Marker = markersLookup[item.MarkerId];
@@ -97,7 +100,7 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings',
                                }else{
 
                                }
-                               pointLookup[item.Id] = item;
+/*                               pointLookup[item.Id] = item;
                                groupsLookup[item.GroupId].Points.push(pointLookup[item.Id]);
                                pointsUngrouped.push(pointLookup[item.Id]);
                                //item.title = item.PointName;
@@ -111,7 +114,7 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings',
                                    iconAnchor: [18,18],
                                    popupAnchor: [-3, -76]
                                };
-                               item.Marker = markersLookup[item.MarkerId];
+                               item.Marker = markersLookup[item.MarkerId];*/
                            });
                        }).then(function(response){
 
