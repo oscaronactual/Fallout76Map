@@ -170,6 +170,12 @@ html, .full-height{
     display:none !important;
 }
 
+.leaflet-marker-icon {
+    filter: drop-shadow(-1px -1px 1px #000); }
+
+img.leaflet-marker-icon {
+    filter: drop-shadow(3px 3px 2px #000); }
+
 .leaflet-tooltip{
     text-align: center;
     font-family: "Roboto Condensed";
