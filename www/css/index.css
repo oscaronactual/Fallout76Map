@@ -175,7 +175,8 @@ html, .full-height{
     font-family: "Roboto Condensed";
     font-weight: normal;
     font-size: 14pt;
-    color: rgba(255, 255, 221, 1.0);
+    background-color: rgba(0,0,0,0);
+    color: rgba(255, 255, 221, 1.0) !important;
     text-shadow: 3px 3px 5px #000, 0px 0px 5px #000, -1px -1px 5px #000;
 }
 
