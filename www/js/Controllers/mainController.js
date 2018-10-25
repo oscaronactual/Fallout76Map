@@ -1,4 +1,4 @@
-falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leafletMapEvents', 'mapDataService', 'leafletData','$log', function($scope, leafletBoundsHelpers,leafletMapEvents, mapDataService, leafletData, $log) {
+falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leafletMapEvents', 'mapDataService', 'leafletData','$log', 'settings', function($scope, leafletBoundsHelpers,leafletMapEvents, mapDataService, leafletData, $log, settings) {
     $scope.initialize = function(){
 
         mapDataService.initializePoints(initializePointLayer);
@@ -64,5 +64,16 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
             }
         });
     });
+
+    $scope.categories = mapDataService.categories;
+    $scope.getMarkerUrl = function(marker){
+        return settings.markerUrl + marker.IconUrl;
+    };
+
+    $scope.setGroupStates = function(group){
+        group.visible = !group.visible;
+        this.layers.overlays[group.GroupName].visible = group.visible;
+    }
+
 
 }]);

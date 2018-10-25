@@ -7,12 +7,15 @@
         <link rel="stylesheet" type="text/css" href="css/index.css">
         <link rel="stylesheet" href="dist/leaflet.css">
         <link rel="stylesheet" href="dist/ui-bootstrap-csp.css">
+        <link rel="stylesheet" href="css/bootstrap.css">
+        <link rel="stylesheet" href="css/bootstrap-theme.css"><!--
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
         <script src="//code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script src="dist/angular.min.js"></script>
+        <script src="dist/angular-animate.min.js"></script>
         <script src="dist/leaflet.js"></script>
         <script src="dist/angular-simple-logger.min.js"></script>
         <script src="dist/ui-leaflet.js"></script>
@@ -30,12 +33,23 @@
     <body>
         <div ng-controller="mainController" class="full-height box">
                 <div class="accordionContainer">
-                    <uib-accordion>
-                        <div uib-accordion-group class="panel-default" heading="First Header">
-                            Static Content 1
-                        </div>
-                        <div uib-accordion-group class="panel-default" heading="Second Header">
-                            Static Content 2
+                    <uib-accordion close-others="true">
+                        <div uib-accordion-group class="panel-default" ng-repeat="category in categories" is-open="category.isOpen">
+                            <uib-accordion-heading>
+                                {{category.CategoryName}}<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': category.isOpen, 'glyphicon-chevron-right': !category.isOpen}"></i>
+                            </uib-accordion-heading>
+                            <div class="container groupContainer">
+                                <div class="row">
+                                    <form>
+                                        <div ng-repeat="group in category.Groups | orderBy:'GroupName'" class="col-md-6 groupItem" ng-click="setGroupStates(group)">
+                                            <img class="groupMarker" ng-class="{'group-disabled': !group.visible}" ng-src="{{getMarkerUrl(group.Marker)}}" />
+                                            <div class="groupLabel" ng-class="{'group-disabled': !group.visible}">{{group.GroupName}}</div>
+                                            <div class="pill" ng-class="{'group-disabled': !group.visible}">{{group.Points.length}}</div>
+                                            <!--<input type="checkbox" ng-model="group.visible" ng-change="matchGroupStates(group)" />-->
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
                     </uib-accordion>
                 </div>

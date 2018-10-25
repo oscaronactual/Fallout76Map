@@ -1,4 +1,4 @@
-var falloutApp = angular.module("falloutApp", ['ui-leaflet', 'ui.bootstrap']);
+var falloutApp = angular.module("falloutApp", ['ui-leaflet', 'ui.bootstrap', 'ngAnimate']);
 
 falloutApp.config(function(){
 
