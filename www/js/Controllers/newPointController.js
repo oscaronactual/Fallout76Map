@@ -1,4 +1,4 @@
-falloutApp.controller('newPointController', ['$uibModalInstance', 'location', 'mapDataService', function($uibModalInstance, location, mapDataService) {
+falloutApp.controller('newPointController', ['$uibModalInstance', 'location', 'mapDataService', 'settings', function($uibModalInstance, location, mapDataService, settings) {
     var $ctrl = this;
 
     $ctrl.pointName = '';
@@ -11,7 +11,7 @@ falloutApp.controller('newPointController', ['$uibModalInstance', 'location', 'm
     $ctrl.iconUrl = function(){
         var marker = $ctrl.markers[$ctrl.markerId];
         if(marker){
-            return '/markers/' + $ctrl.markers[$ctrl.markerId].IconUrl;
+            return settings.markerUrl + $ctrl.markers[$ctrl.markerId].IconUrl;
         }else{return '';}
     };
     $ctrl.ok = function () {

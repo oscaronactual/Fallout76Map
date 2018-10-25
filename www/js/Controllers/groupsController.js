@@ -1,13 +1,13 @@
-falloutApp.controller('groupsController', ['$uibModalInstance', 'mapDataService', '$document','$uibModal', function($uibModalInstance, mapDataService, $document,$uibModal) {
+falloutApp.controller('groupsController', ['$uibModalInstance', 'mapDataService', '$document','$uibModal','settings', function($uibModalInstance, mapDataService, $document,$uibModal,settings) {
     var $ctrl = this;
-    $ctrl.groups = mapDataService.namedGroups;
+    $ctrl.groups = mapDataService.groupList;
     $ctrl.Markers = mapDataService.markersLookup;
     $ctrl.Categories = mapDataService.categoriesLookup;
     $ctrl.getCategoryName = function(group){
         return $ctrl.Categories[group.CategoryId].CategoryName;
     };
     $ctrl.markerIcon = function(group){
-        return '/markers/' + $ctrl.Markers[group.MarkerId].IconUrl;
+        return settings.markerUrl + $ctrl.Markers[group.MarkerId].IconUrl;
     };
     $ctrl.newGroup = function(parentSelector){
         var modalInstance = $uibModal.open({
@@ -65,7 +65,7 @@ falloutApp.controller('groupsController', ['$uibModalInstance', 'mapDataService'
     };
 }]);
 
-falloutApp.controller('newGroupController', ['$uibModalInstance', 'mapDataService', function($uibModalInstance, mapDataService) {
+falloutApp.controller('newGroupController', ['$uibModalInstance', 'mapDataService','settings', function($uibModalInstance, mapDataService, settings) {
     var $ctrl = this;
     $ctrl.groupName = "";
     $ctrl.categoryId = 0;
@@ -73,7 +73,7 @@ falloutApp.controller('newGroupController', ['$uibModalInstance', 'mapDataServic
     $ctrl.Markers = mapDataService.markersLookup;
     $ctrl.Categories = mapDataService.categoriesLookup;
     $ctrl.getIcon = function(){
-        return '/markers/' + $ctrl.Markers[$ctrl.markerId].IconUrl;
+        return settings.markerUrl + $ctrl.Markers[$ctrl.markerId].IconUrl;
     };
 
     $ctrl.ok = function () {
@@ -91,7 +91,7 @@ falloutApp.controller('newGroupController', ['$uibModalInstance', 'mapDataServic
     };
 }]);
 
-falloutApp.controller('updateGroupController', ['$uibModalInstance', 'mapDataService', 'groupToUpdate', function($uibModalInstance, mapDataService, groupToUpdate) {
+falloutApp.controller('updateGroupController', ['$uibModalInstance', 'mapDataService', 'groupToUpdate','settings', function($uibModalInstance, mapDataService, groupToUpdate,settings) {
     var $ctrl = this;
     $ctrl.groupName = groupToUpdate.GroupName;
     $ctrl.categoryId = groupToUpdate.CategoryId;
@@ -99,7 +99,7 @@ falloutApp.controller('updateGroupController', ['$uibModalInstance', 'mapDataSer
     $ctrl.Markers = mapDataService.markersLookup;
     $ctrl.Categories = mapDataService.categoriesLookup;
     $ctrl.getIcon = function(){
-        return '/markers/' + $ctrl.Markers[$ctrl.markerId].IconUrl;
+        return settings.markerUrl + $ctrl.Markers[$ctrl.markerId].IconUrl;
     };
 
     $ctrl.ok = function () {

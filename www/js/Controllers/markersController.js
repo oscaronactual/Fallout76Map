@@ -1,9 +1,9 @@
-falloutApp.controller('markersController', ['$uibModalInstance', 'mapDataService', '$document','$uibModal', function($uibModalInstance, mapDataService, $document,$uibModal) {
+falloutApp.controller('markersController', ['$uibModalInstance', 'mapDataService', '$document','$uibModal', 'settings', function($uibModalInstance, mapDataService, $document,$uibModal, settings) {
     var $ctrl = this;
     $ctrl.markers = mapDataService.markers;
 
     $ctrl.markerIcon = function(marker){
-        return '/markers/' + marker.IconUrl;
+        return settings.markerUrl + marker.IconUrl;
     };
 
     $ctrl.newMarker = function(parentSelector){
@@ -63,13 +63,13 @@ falloutApp.controller('markersController', ['$uibModalInstance', 'mapDataService
     };
 }]);
 
-falloutApp.controller('newMarkerController', ['$uibModalInstance', 'mapDataService', function($uibModalInstance, mapDataService) {
+falloutApp.controller('newMarkerController', ['$uibModalInstance', 'mapDataService','settings', function($uibModalInstance, mapDataService, settings) {
     var $ctrl = this;
     $ctrl.markerName = "";
     $ctrl.iconUrl = "";
 
     $ctrl.getIcon = function(){
-        return '/markers/' + $ctrl.iconUrl;
+        return settings.markerUrl + $ctrl.iconUrl;
     };
     $ctrl.ok = function () {
         mapDataService.addMarker({markerName: $ctrl.markerName, iconUrl:$ctrl.iconUrl});
@@ -82,13 +82,13 @@ falloutApp.controller('newMarkerController', ['$uibModalInstance', 'mapDataServi
     };
 }]);
 
-falloutApp.controller('updateMarkerController', ['$uibModalInstance', 'mapDataService', 'markerToEdit', function($uibModalInstance, mapDataService, markerToEdit) {
+falloutApp.controller('updateMarkerController', ['$uibModalInstance', 'mapDataService', 'markerToEdit','settings', function($uibModalInstance, mapDataService, markerToEdit,settings) {
     var $ctrl = this;
     $ctrl.markerToEdit = markerToEdit;
     $ctrl.markerName = markerToEdit.MarkerName;
     $ctrl.iconUrl = markerToEdit.iconUrl;
     $ctrl.getIcon = function(){
-        return '/markers/' + $ctrl.iconUrl;
+        return settings.markerUrl + $ctrl.iconUrl;
     };
 
     $ctrl.ok = function () {
