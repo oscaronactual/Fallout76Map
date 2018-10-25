@@ -329,15 +329,24 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                }
                            });
                            response.data.Points.forEach(function(item, index, array){
-                               if(groupsLookup[item.GroupId]){
-                                   var group = groupsLookup[item.GroupId];
+                               var testPoint = pointLookup[item.Id] = item;
+                               var group = groupsLookup[item.GroupId];
+                               var oldPoint;
+                               if(testPoint){
+                                   var oldGroup = groupsLookup[testPoint.GroupId];
+                                   if(oldGroup && oldGroup.Id !== item.GroupId){//Item has changed groups
+                                       var oldPointIndex = oldGroup.Points.findIndex(function(element){
+                                           return element.Id === item.Id;
+                                       });
+                                       oldPoint = oldGroup.Points.splice(oldPointIndex, 1);
+                                       group.Points.push(oldPoint);
+                                   }
                                    var point = group.Points.find(function(element){
                                        return element.Id === item.Id;
                                    });
                                    if(point.ModifiedDate < item.ModifiedDate){
                                        pointLookup[item.Id] = item;
                                        item.Marker = markersLookup[item.MarkerId];
-                                       //item.title = item.PointName;
                                        item.lat = item.LatCoord;
                                        item.lng = item.LongCoord;
                                        item.draggable = true;
@@ -350,23 +359,22 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                        };
                                    }
                                }else{
-
+                                   pointLookup[item.Id] = item;
+                                   groupsLookup[item.GroupId].Points.push(pointLookup[item.Id]);
+                                   pointsUngrouped.push(pointLookup[item.Id]);
+                                   //item.title = item.PointName;
+                                   item.lat = item.LatCoord;
+                                   item.lng = item.LongCoord;
+                                   item.draggable = true;
+                                   item.layer = groupsLookup[item.GroupId].GroupName;
+                                   item.icon = {
+                                       iconUrl: settings.markerUrl + markersLookup[item.MarkerId].IconUrl,
+                                       iconSize: [36,36],
+                                       iconAnchor: [18,18],
+                                       popupAnchor: [-3, -76]
+                                   };
+                                   item.Marker = markersLookup[item.MarkerId];
                                }
-                               /*pointLookup[item.Id] = item;
-                               groupsLookup[item.GroupId].Points.push(pointLookup[item.Id]);
-                               pointsUngrouped.push(pointLookup[item.Id]);
-                               item.title = item.PointName;
-                               item.lat = item.LatCoord;
-                               item.lng = item.LongCoord;
-                               item.draggable = true;
-                               item.layer = groupsLookup[item.GroupId].GroupName;
-                               item.icon = {
-                                   iconUrl: '/markers/' + markersLookup[item.MarkerId].IconUrl,
-                                   iconSize: [36,36],
-                                   iconAnchor: [18,18],
-                                   popupAnchor: [-3, -76]
-                               };
-                               item.Marker = markersLookup[item.MarkerId];*/
                            });
                        }).then(function(response){
 
@@ -405,7 +413,7 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                         });
                         response.data.Groups.forEach(function(item, index, array){
                             var category = categoriesLookup[item.CategoryId];
-                            //item.name= item.GroupName;
+                            item.name= item.GroupName;
                             item.type= 'group';
                             item.visible= true;
                             item.Points = [];
@@ -419,7 +427,7 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                             pointLookup[item.Id] = item;
                             groupsLookup[item.GroupId].Points.push(pointLookup[item.Id]);
                             pointsUngrouped.push(pointLookup[item.Id]);
-                            item.title = item.PointName;
+                            //item.title = item.PointName;
                             item.lat = item.LatCoord;
                             item.lng = item.LongCoord;
                             item.draggable = true;
