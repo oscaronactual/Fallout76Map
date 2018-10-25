@@ -29,11 +29,11 @@ body {
     background-image:-webkit-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
     background-image:-ms-linear-gradient(top, #A7A7A7 0%, #E4E4E4 51%);
     background-image:-webkit-gradient(
-        linear,
-        left top,
-        left bottom,
-        color-stop(0, #A7A7A7),
-        color-stop(0.51, #E4E4E4)
+            linear,
+            left top,
+            left bottom,
+            color-stop(0, #A7A7A7),
+            color-stop(0.51, #E4E4E4)
     );
     background-attachment:fixed;
     font-family:'HelveticaNeue-Light', 'HelveticaNeue', Helvetica, Arial, sans-serif;
@@ -41,7 +41,7 @@ body {
     height:100%;
     margin:0px;
     padding:0px;
-    text-transform:uppercase;
+    /*    text-transform:uppercase;*/
     width:100%;
 }
 
@@ -56,7 +56,7 @@ body {
     text-align:center;
     padding:180px 0px 0px 0px;     /* image height is 200px (bottom 20px are overlapped with text) */
     margin:-115px 0px 0px -112px;  /* offset vertical: half of image height and text area height */
-                                   /* offset horizontal: half of text area width */
+    /* offset horizontal: half of text area width */
 }
 
 /* Landscape layout (with min-width) */
@@ -65,7 +65,7 @@ body {
         background-position:left center;
         padding:75px 0px 75px 170px;  /* padding-top + padding-bottom + text area = image height */
         margin:-90px 0px 0px -198px;  /* offset vertical: half of image height */
-                                      /* offset horizontal: half of image width and text area width */
+        /* offset horizontal: half of image width and text area width */
     }
 }
 
@@ -102,13 +102,13 @@ h1 {
     50% { opacity: 0.4; }
     to { opacity: 1.0; }
 }
- 
+
 @-webkit-keyframes fade {
     from { opacity: 1.0; }
     50% { opacity: 0.4; }
     to { opacity: 1.0; }
 }
- 
+
 .blink {
     animation:fade 3000ms infinite;
     -webkit-animation:fade 3000ms infinite;
@@ -169,19 +169,28 @@ html, .full-height{
 .leaflet-control-layers{
     display:none !important;
 }
+
+.leaflet-marker-icon {
+    filter: drop-shadow(-1px -1px 1px #000); }
+
+img.leaflet-marker-icon {
+    filter: drop-shadow(3px 3px 2px #000); }
+
 .leaflet-tooltip{
     text-align: center;
     font-family: "Roboto Condensed";
     font-weight: normal;
     font-size: 14pt;
-    color: rgba(255, 255, 221, 1.0);
+    background-color: rgba(0,0,0,0);
+    color: rgba(255, 255, 221, 1.0) !important;
     text-shadow: 3px 3px 5px #000, 0px 0px 5px #000, -1px -1px 5px #000;
 }
+
 .accordionContainer{
     position: absolute;
     top:100px;
     left: 100px;
-    width: 200px;
+    width: 500px;
     z-index: 1000;
 }
 
@@ -193,4 +202,52 @@ html, .full-height{
 }
 .left {
     float:left;
+}
+.groupContainer{
+    width: 100% !important;
+}
+.groupItem{
+    margin-bottom: 3px;
+}
+
+.groupMarker{
+    float:left;
+    margin-right: 5px;
+    height:21px;
+    width: 21px;
+}
+.groupLabel{
+    line-height: 21px;
+    white-space: nowrap;
+    width: 140px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    float: left;
+}
+
+.pill{
+    background-color: #91c0fd;
+    box-shadow: 1px 1px 3px #000 inset;
+    margin-left: 5px;
+    padding: 2px 3px 0 4px;
+    color: #000;
+    border-radius: 7px;
+    font-size: 14px;
+    line-height: 17px;
+    float: left;
+    text-align: center;
+    width: 23px;
+}
+
+.groupMarker.group-disabled{
+    opacity: 0.5;
+}
+
+.pill.group-disabled {
+    opacity: 0.5;
+}
+
+.groupLabel.group-disabled{
+    text-decoration: line-through;
+    opacity: 0.5;
 }
