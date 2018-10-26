@@ -188,9 +188,9 @@ img.leaflet-marker-icon {
 
 .accordionContainer{
     position: absolute;
-    top:100px;
-    left: 100px;
-    width: 500px;
+    top:150px;
+    left: 20px;
+    width: 380px;
     z-index: 1000;
 }
 
@@ -219,7 +219,7 @@ img.leaflet-marker-icon {
 .groupLabel{
     line-height: 21px;
     white-space: nowrap;
-    width: 140px;
+    width: 90px;
     overflow: hidden;
     text-overflow: ellipsis;
     float: left;
