@@ -167,9 +167,12 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                    item.Points = [];
                    item.Marker = markersLookup[item.MarkerId];
                    groupsLookup[item.Id] = item;
+                   groupList.push(item);
                    namedGroups[item.GroupName] = item;
                    pointsGrouped.push(item);
                    categoriesLookup[item.CategoryId].groups.push(item);
+
+                   categoriesLookup[item.CategoryId].Groups.push(item);
                })
                .then(function(response){});
        }
@@ -357,7 +360,11 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                    }
                                }
                                else{
-                                   //TODO : Delete groups that are IsDeleted
+                                   categoryList.forEach(function(element){
+                                       findAndSplice(item.Id, element.Groups);
+                                   });
+                                   findAndSplice(item.Id, groupList);
+                                   delete groupsLookup[item.Id];
                                }
                            });
                            response.data.Points.forEach(function(item, index, array){
@@ -417,6 +424,15 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                    latestUpdate = newLatestUpdate;
                    poll();
                }, 30000);
+       }
+
+       function findAndSplice(id, searchArray){
+           var foundIndex = searchArray.findIndex(function(element){
+               return element.Id === id;
+           });
+           if (foundIndex > -1) {
+               searchArray.splice(foundIndex, 1);
+           }
        }
 
        function addAccordionPropertiesToCategory(category){
