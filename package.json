@@ -10,7 +10,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "npm run copy:angular && npm run copy:angular-animate && npm run copy:leaflet && npm run copy:leafletImages && npm run copy:leafletCss && npm run copy:cordova && npm run copy:leafletUi && npm run copy:simpleLogger && npm run copy:ui-bootstrap && npm run copy:ui-bootstrapCss && npm run copy:ui-bootstrapTemplates",
+    "build": "npm run copy:angular && npm run copy:angular-animate && npm run copy:leaflet && npm run copy:leafletImages && npm run copy:cordova && npm run copy:leafletUi && npm run copy:simpleLogger && npm run copy:ui-bootstrap && npm run copy:ui-bootstrapCss && npm run copy:ui-bootstrapTemplates",
     "copy:angular": "copyfiles -f node_modules/angular/angular.min.js www/dist",
     "copy:angular-animate": "copyfiles -f node_modules/angular-animate/angular-animate.min.js www/dist",
     "copy:leaflet": "copyfiles -f node_modules/leaflet/dist/leaflet.js www/dist",
