@@ -18,6 +18,7 @@ falloutApp.controller('newPointController', ['$uibModalInstance', 'location', 'm
         $uibModalInstance.close({
             pointName: $ctrl.pointName,
             link: $ctrl.link,
+            description: $ctrl.description,
             lat: location.lat,
             lng: location.lng,
             markerId: $ctrl.markerId,

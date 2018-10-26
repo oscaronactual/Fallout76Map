@@ -84,7 +84,7 @@
                     </div>
                 </uib-accordion>
             </div>
-            <leaflet class="rowLocal content" width="100%" height="100%" layers="layers" markers="markers" maxbounds="maxbounds" lf-center="center"></leaflet>
+            <leaflet class="rowLocal content" width="100%" height="100%" layers="layers" markers="markers" maxbounds="maxbounds" defaults="defaults" lf-center="center"></leaflet>
             <script type="text/ng-template" id="newPoint.html">
                 <div class="modal-header">
                     <h3 class="modal-title" id="modal-title">Add Point</h3>
@@ -96,12 +96,12 @@
                            <input type="text" class="form-control" id="pointName" ng-model="$ctrl.pointName" placeholder="My Point">
                        </div>
                        <div class="form-group">
-                           <label for="pointLink">Link</label>
-                           <input type="text" class="form-control" id="pointLink" ng-model="$ctrl.link" placeholder="http://fallout76wiki.com/MyPoint">
-                       </div>
-                       <div class="form-group">
                            <label for="pointDescription">Description</label>
                            <input type="text" class="form-control" id="pointDescription" ng-model="$ctrl.description" placeholder="Starting location, perk cards, etc">
+                       </div>
+                       <div class="form-group">
+                           <label for="pointLink">Link</label>
+                           <input type="text" class="form-control" id="pointLink" ng-model="$ctrl.link" placeholder="http://fallout76wiki.com/MyPoint">
                        </div>
                        <div class="form-group">
                            <label for="category">Group</label>
