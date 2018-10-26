@@ -242,7 +242,7 @@
                         </thead>
                         <tbody>
                         <tr ng-repeat="marker in $ctrl.markers">
-                            <td><img ng-src="{{$ctrl.markerIcon(marker)}}"/></td>
+                            <td><img class="groupMarker"  ng-src="{{$ctrl.markerIcon(marker)}}"/></td>
                             <td>{{marker.MarkerName}}</td>
                             <td>
                                 <a href="#" ng-click="$ctrl.updateMarker(marker)">Update</a> | <a href="#" ng-click="$ctrl.deleteMarker(marker)">Delete</a>
@@ -331,8 +331,8 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr ng-repeat="group in $ctrl.groups">
-                            <td><img ng-src="{{$ctrl.markerIcon(group)}}"/></td>
+                        <tr ng-repeat="group in $ctrl.groups | orderBy:'GroupName'">
+                            <td><img class="groupMarker" ng-src="{{$ctrl.markerIcon(group)}}"/></td>
                             <td>{{group.GroupName}}</td>
                             <td>{{$ctrl.getCategoryName(group)}}</td>
                             <td>
