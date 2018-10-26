@@ -217,7 +217,7 @@ img.leaflet-marker-icon {
 .groupLabel{
     line-height: 21px;
     white-space: nowrap;
-    width: 140px;
+    width: 90px;
     overflow: hidden;
     text-overflow: ellipsis;
     float: left;
