@@ -36,7 +36,9 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
                         url: 'http://d2upr4z2n1fxid.cloudfront.net/{z}/{x}/{y}.png',
                         layerParams:{
                             errorTileUrl: 'https://s3-us-west-1.amazonaws.com/fallout76maptiles/emptyTile.png',
-                            noWrap: true
+                            noWrap: true,
+                            maxZoom:8,
+                            minZoom:3
                         },
                         type: 'xyz'
                     }
