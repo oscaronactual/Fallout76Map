@@ -188,9 +188,9 @@ img.leaflet-marker-icon {
 
 .accordionContainer{
     position: absolute;
-    top:100px;
-    left: 100px;
-    width: 500px;
+    top:200px;
+    left: 20px;
+    width: 380px;
     z-index: 1000;
 }
 
@@ -248,4 +248,23 @@ img.leaflet-marker-icon {
 .groupLabel.group-disabled{
     text-decoration: line-through;
     opacity: 0.5;
+}
+
+div.headerMaterial{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 200px;
+    height: 200px;
+    z-index: 1000;
+}
+
+div.subheader {
+    text-align: center;
+    font-family: "Roboto Condensed";
+    font-weight: normal;
+    color: rgba(255, 255, 221, 1.0);
+    text-shadow: 3px 3px 5px #000, 0px 0px 5px #000, -1px -1px 5px #000;
+    /* background-color: rgba(226, 230, 235, 0.4);*/
+    margin: 0 0 20px 0;
 }

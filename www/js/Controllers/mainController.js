@@ -46,7 +46,11 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
                 overlays: $scope.markerLayers
             },
             markers: $scope.markers,
-            maxbounds: maxbounds
+            maxbounds: maxbounds,
+            defaults:{
+                attributionControl: false,
+                zoomControlPosition: 'bottomright'
+            }
         });
 
          function initializePointLayer(){

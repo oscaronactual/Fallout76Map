@@ -11,6 +11,7 @@
         <link rel="stylesheet" href="css/bootstrap-theme.css"><!--
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
+        <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         <script src="//code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -32,6 +33,13 @@
     </head>
     <body>
         <div ng-controller="mainController" class="full-height box">
+            <div class="headerMaterial">
+                <img src="img/Fallout_76_logo_sm.png" ALT="Fallout 76 Map Project">
+                <div class="subheader"> Fallout 76 Interactive Map Project<br /> <a href="https://discord.gg/eBHEHDb%22%3E">
+                <img src="img/discord-logo.png" ALT="Join us on Discord!" height="34" width="100" style="margin:0 8px 8px 0;"> </a>
+                    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Fallout 76 Interactive Map Project" data-url="http://www.falloutmaps.com/" data-via="SHC_Mendrak" data-hashtags="Fallout76" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                </div>
+            </div>
                 <div class="accordionContainer">
                     <uib-accordion close-others="true">
                         <div uib-accordion-group class="panel-default" ng-repeat="category in categories" is-open="category.isOpen">
@@ -53,7 +61,7 @@
                         </div>
                     </uib-accordion>
                 </div>
-                <leaflet class="rowLocal content" width="100%" height="100%" layers="layers" markers="markers" maxbounds="maxbounds" lf-center="center"></leaflet>
+                <leaflet class="rowLocal content" width="100%" height="100%" layers="layers" markers="markers" maxbounds="maxbounds" defaults="defaults" lf-center="center"></leaflet>
         </div>
     </body>
 </html>
