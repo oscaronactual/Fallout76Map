@@ -384,8 +384,8 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                        testPoint.draggable = true;
                                        testPoint.icon = {
                                            iconUrl: settings.markerUrl + markersLookup[testPoint.MarkerId].IconUrl,
-                                           iconSize: [36,36],
-                                           iconAnchor: [18,18],
+                                           iconSize: [30,30],
+                                           iconAnchor: [15,15],
                                            popupAnchor: [-3, -76]
                                        };
 
@@ -401,8 +401,8 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                        item.layer = groupsLookup[item.GroupId].GroupName;
                                        item.icon = {
                                            iconUrl: settings.markerUrl + markersLookup[item.MarkerId].IconUrl,
-                                           iconSize: [36,36],
-                                           iconAnchor: [18,18],
+                                           iconSize: [30,30],
+                                           iconAnchor: [15,15],
                                            popupAnchor: [-3, -76]
                                        };
                                        item.Marker = markersLookup[item.MarkerId];
@@ -461,7 +461,8 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                 markersLookup[item.Id] = item;
                                 markerList.push(item);
                                 item.iconUrl = settings.markerUrl + item.IconUrl;
-                                item.iconSize = [38, 95];
+                                item.iconSize = [30, 30];
+                                item.iconAnchor = [15,15];
                                 item.popupAnchor = [-3, -76];
                                 //shadowUrl: 'img/leaf-shadow.png',
                                 //shadowSize:   [50, 64], // size of the shadow
@@ -495,8 +496,8 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                 item.layer = groupsLookup[item.GroupId].GroupName;
                                 item.icon = {
                                     iconUrl: settings.markerUrl + markersLookup[item.MarkerId].IconUrl,
-                                    iconSize: [36,36],
-                                    iconAnchor: [18,18],
+                                    iconSize: [30,30],
+                                    iconAnchor: [15,15],
                                     popupAnchor: [-3, -76]
                                 };
                                 item.Marker = markersLookup[item.MarkerId];

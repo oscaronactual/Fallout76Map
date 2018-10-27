@@ -188,7 +188,7 @@ img.leaflet-marker-icon {
 
 .accordionContainer{
     position: absolute;
-    top:150px;
+    top:200px;
     left: 20px;
     width: 380px;
     z-index: 1000;
