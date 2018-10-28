@@ -8,7 +8,8 @@
         <link rel="stylesheet" href="dist/leaflet.css">
         <link rel="stylesheet" href="dist/ui-bootstrap-csp.css">
         <link rel="stylesheet" href="css/bootstrap.css">
-        <link rel="stylesheet" href="css/bootstrap-theme.css"><!--
+        <link rel="stylesheet" href="css/bootstrap-theme.css">
+        <link rel="stylesheet" href="css/pure-drawer.css"><!--
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
@@ -17,7 +18,8 @@
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script src="dist/angular.min.js"></script>
         <script src="dist/angular-animate.min.js"></script>
-        <script src="dist/leaflet.js"></script>
+<!--        <script src="dist/leaflet.js"></script>-->
+        <script src="dist/leaflet-src.js"></script>
         <script src="dist/angular-simple-logger.min.js"></script>
         <script src="dist/ui-leaflet.js"></script>
         <script src="dist/ui-bootstrap.js"></script>
@@ -26,25 +28,30 @@
         <script src="js/constants.js"></script>
         <script src="js/Services/mapDataService.js"></script>
         <script src="js/Controllers/mainController.js"></script>
+        <script src="dist/slideout.js"></script>
+
         <!-- <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script> -->
         <title>Fallout 76 Interactive Map Project</title>
         <link href="https://fonts.googleapis.com/css?family=Roboto+Condensed" rel="stylesheet">
     </head>
-    <body>
-        <div ng-controller="mainController" class="full-height box">
-            <div class="headerMaterial">
-                <img src="img/Fallout_76_logo_sm.png" ALT="Fallout 76 Map Project">
-                <div class="subheader"> Fallout 76 Interactive Map Project<br /> <a href="https://discord.gg/eBHEHDb%22%3E">
-                <img src="img/discord-logo.png" ALT="Join us on Discord!" height="34" width="100" style="margin:0 8px 8px 0;"> </a>
-                    <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Fallout 76 Interactive Map Project" data-url="http://www.falloutmaps.com/" data-via="SHC_Mendrak" data-hashtags="Fallout76" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+    <body ng-controller="mainController">
+        <div class="full-height box">
+            <div class="horizontal-collapse" uib-collapse="sidebarIsCollapsed" horizontal>
+                <div class="headerMaterial">
+                    <img src="img/Fallout_76_logo_sm.png" ALT="Fallout 76 Map Project">
+                    <div class="subheader"> Fallout 76 Interactive Map Project<br /> <a href="https://discord.gg/eBHEHDb%22%3E">
+                        <img src="img/discord-logo.png" ALT="Join us on Discord!" height="34" width="100" style="margin:0 8px 8px 0;"> </a>
+                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Fallout 76 Interactive Map Project" data-url="http://www.falloutmaps.com/" data-via="SHC_Mendrak" data-hashtags="Fallout76" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                    </div>
                 </div>
-            </div>
                 <div class="accordionContainer">
                     <uib-accordion close-others="true">
-                        <div uib-accordion-group class="panel-default" ng-repeat="category in categories" is-open="category.isOpen" ng-click="category.isOpen=!category.isOpen">
-                            <uib-accordion-heading>
-                                {{category.CategoryName}}<i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': category.isOpen, 'glyphicon-chevron-right': !category.isOpen}"></i>
+                        <div uib-accordion-group class="panel-default" ng-repeat="category in categories" is-open="category.isOpen">
+                            <uib-accordion-heading ng-click="category.isOpen=!category.isOpen">
+                                <div>{{category.CategoryName}}
+                                    <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': category.isOpen, 'glyphicon-chevron-right': !category.isOpen}"></i>
+                                </div>
                             </uib-accordion-heading>
                             <div class="container groupContainer">
                                 <div class="row">
@@ -53,7 +60,6 @@
                                             <img class="groupMarker" ng-class="{'group-disabled': !group.visible}" ng-src="{{getMarkerUrl(group.Marker)}}" />
                                             <div class="groupLabel" ng-class="{'group-disabled': !group.visible}">{{group.GroupName}}</div>
                                             <div class="pill" ng-class="{'group-disabled': !group.visible}">{{group.Points.length}}</div>
-                                            <!--<input type="checkbox" ng-model="group.visible" ng-change="matchGroupStates(group)" />-->
                                         </div>
                                     </form>
                                 </div>
@@ -61,7 +67,9 @@
                         </div>
                     </uib-accordion>
                 </div>
-                <leaflet class="rowLocal content" width="100%" height="100%" layers="layers" markers="markers" maxbounds="maxbounds" defaults="defaults" lf-center="center"></leaflet>
+            </div>
+            <div class="btn-default collapseButton" ng-click="sidebarIsCollapsed = !sidebarIsCollapsed">Collapse</div>
         </div>
+        <leaflet class="rowLocal content" width="100%" height="100%" layers="layers" markers="markers" maxbounds="maxbounds" defaults="defaults" lf-center="center"></leaflet>
     </body>
 </html>
