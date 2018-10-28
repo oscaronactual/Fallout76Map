@@ -251,3 +251,11 @@ img.leaflet-marker-icon {
     text-decoration: line-through;
     opacity: 0.5;
 }
+
+.panel-heading{
+    padding:0px !important;
+}
+
+div.accordionTabHeader{
+    padding:10px 15px;
+}
