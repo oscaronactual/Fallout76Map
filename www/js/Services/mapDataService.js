@@ -1,5 +1,5 @@
-falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings',
-   function($http, $timeout, settings){
+falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootScope',
+   function($http, $timeout, settings, $rootScope){
        var pointsGrouped = [];
        var pointsUngrouped = [];
        var categoriesLookup = {};
@@ -12,6 +12,7 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings',
        var pointList = [];
        var namedGroups={};
        var latestUpdate;
+       var scope = $rootScope;
 
        function poll(){
            $timeout(
@@ -166,6 +167,16 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings',
                    poll();
                }, 30000);
        }
+        function getMessageTemplate(){
+            return "    <div class='markerPopup'>\n" +
+                "      <div class='markerPopupHeader'>\n" +
+                "        <span class='markerTitle'>{{point.PointName}}</span>\n" +
+                "      </div>\n" +
+                "      <div class='markerData'>\n" +
+                "        <span class='markerDescription'>{{point.Description}}</span><br />\n" +
+                "        <a ng-show='point.Link' ng-href=\"{{point.Link}}\">Wiki:{{point.PointName}}</a>\n" +
+                "    </div>";
+        }
 
        function addAccordionPropertiesToCategory(category){
            category.isOpen = false;
@@ -223,13 +234,26 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings',
                                 //item.title = item.PointName;
                                 item.lat = item.LatCoord;
                                 item.lng = item.LongCoord;
+                                item.getMessageScope = function(){
+                                    var newScope = scope.$new(true, $rootScope);
+                                    angular.extend(newScope,{
+                                       point: item
+                                    });
+                                  return newScope;
+                                };
+                                item.message = getMessageTemplate();
+                                item.popupOptions = {
+                                    minWidth:200,
+                                    className: "falloutMarkerPopup"
+                                };
+                                item.compileMessage = true;
                                 item.draggable = false;
                                 item.layer = groupsLookup[item.GroupId].GroupName;
                                 item.icon = {
                                     iconUrl: settings.markerUrl + markersLookup[item.MarkerId].IconUrl,
                                     iconSize: [30,30],
                                     iconAnchor: [15,15],
-                                    popupAnchor: [-3, -76]
+                                    popupAnchor: [0, -10]
                                 };
                                 item.Marker = markersLookup[item.MarkerId];
                             }

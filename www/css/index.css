@@ -131,7 +131,8 @@ html, .full-height{
 
 .box{
     display: flex;
-    flex-flow: column;
+    /* flex-flow: column; */
+    position: absolute;
 }
 
 .box .rowLocal.header {
@@ -189,7 +190,7 @@ img.leaflet-marker-icon {
 .accordionContainer{
     position: absolute;
     top:200px;
-    left: 20px;
+    left: 10px;
     width: 380px;
     z-index: 1000;
 }
@@ -267,4 +268,60 @@ div.subheader {
     text-shadow: 3px 3px 5px #000, 0px 0px 5px #000, -1px -1px 5px #000;
     /* background-color: rgba(226, 230, 235, 0.4);*/
     margin: 0 0 20px 0;
+}
+
+.markerPopup{
+    width:auto;
+    max-width: 300px;
+    height:auto;
+    background-color:RGBA(0,0,0,.5);
+    border-radius: 8px;
+}
+
+.markerPopupHeader{
+    width:100%;
+    height:auto;
+    background-color:#FFE082;
+    border-radius: 8px 8px 0 0;
+    padding: 10px;
+}
+
+.markerTitle{
+    margin-left:5px;
+}
+
+div.falloutMarkerPopup{
+    padding: 0px;
+    background-color: transparent;
+    border: none;
+}
+
+div.falloutMarkerPopup div.leaflet-popup-content-wrapper{
+    background:none;
+    box-shadow: none;
+}
+
+div.falloutMarkerPopup div.leaflet-popup-content-wrapper div.leaflet-popup-content{
+    margin:0px;
+}
+
+
+.leaflet-popup-tip {
+    background:RGBA(0,0,0,.5) !important;
+}
+
+.horizontal-collapse{
+    width: 400px;
+    background-color: RGBA(0,0,0,0.5);
+    height: 100vh;
+    z-index: 999;
+}
+
+.collapseButton{
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    height:40px;
+    width:10px;
+    z-index:1000;
 }
