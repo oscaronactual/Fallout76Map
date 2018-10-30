@@ -1,5 +1,5 @@
-falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootScope',
-   function($http, $timeout, settings, $rootScope){
+falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootScope','localStorageService',
+   function($http, $timeout, settings, $rootScope, localStorageService){
        var pointsGrouped = [];
        var pointsUngrouped = [];
        var categoriesLookup = {};
@@ -55,9 +55,9 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
                                    else{
                                        markersLookup[item.Id] = item;
                                        item.iconUrl= settings.markerUrl + markersLookup[item.MarkerId].IconUrl;
-                                       item.iconSize = [38, 95];
-                                       item.iconAnchor=  [15,15];
-                                       item.popupAnchor= [-3, -76];
+                                       item.iconSize= [25,25];
+                                       item.iconAnchor = [15,15];
+                                       item.popupAnchor = [0, -10];
                                    }
                                }else{
                                    if(markersLookup[item.Id]){
@@ -79,6 +79,7 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
                                        var presentGroup = groupsLookup[item.Id];
                                        presentGroup.GroupName = item.GroupName;
                                        presentGroup.name= item.GroupName;
+                                       presentGroup.visible = item.VisibleByDefault;
                                        presentGroup.MarkerId = item.MarkerId;
                                        presentGroup.Marker = markersLookup[item.MarkerId];
 
@@ -95,7 +96,7 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
                                    else{
                                        item.name= item.GroupName;
                                        item.type= 'group';
-                                       item.visible= true;
+                                       item.visible = item.VisibleByDefault;
                                        item.Points = [];
                                        item.Marker = markersLookup[item.MarkerId];
                                        groupsLookup[item.Id] = item;
@@ -126,9 +127,9 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
                                        testPoint.draggable = false;
                                        testPoint.icon = {
                                            iconUrl: settings.markerUrl + markersLookup[testPoint.MarkerId].IconUrl,
-                                           iconSize: [30,30],
+                                           iconSize: [25,25],
                                            iconAnchor: [15,15],
-                                           popupAnchor: [-3, -76]
+                                           popupAnchor: [0, -10]
                                        };
 
                                    }
@@ -143,11 +144,25 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
                                        item.layer = groupsLookup[item.GroupId].GroupName;
                                        item.icon = {
                                            iconUrl: settings.markerUrl + markersLookup[item.MarkerId].IconUrl,
-                                           iconSize: [30,30],
+                                           iconSize: [25,25],
                                            iconAnchor: [15,15],
-                                           popupAnchor: [-3, -76]
+                                           popupAnchor: [0, -10],
+                                           className: 'markerShadow1 markerShadow2 markerShadow3'
                                        };
                                        item.Marker = markersLookup[item.MarkerId];
+                                       item.getMessageScope = function(){
+                                           var newScope = scope.$new(true, $rootScope);
+                                           angular.extend(newScope,{
+                                               point: item
+                                           });
+                                           return newScope;
+                                       };
+                                       item.message = getMessageTemplate();
+                                       item.popupOptions = {
+                                           minWidth:200,
+                                           className: "falloutMarkerPopup"
+                                       };
+                                       item.compileMessage = true;
                                    }
                                }
                                else{
@@ -168,14 +183,15 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
                }, 30000);
        }
         function getMessageTemplate(){
-            return "    <div class='markerPopup'>\n" +
-                "      <div class='markerPopupHeader'>\n" +
-                "        <span class='markerTitle'>{{point.PointName}}</span>\n" +
-                "      </div>\n" +
-                "      <div class='markerData'>\n" +
-                "        <span class='markerDescription'>{{point.Description}}</span><br />\n" +
-                "        <a ng-show='point.Link' ng-href=\"{{point.Link}}\">Wiki:{{point.PointName}}</a>\n" +
-                "    </div>";
+            return "    <div class='markerPopup' ng-controller='mapPointController'>\n" +
+                   "      <div class='markerPopupHeader'>\n" +
+                   "        <span class='markerTitle'>{{point.PointName}}</span>\n" +
+                   "      </div>\n" +
+                   "      <div class='markerData'>\n" +
+                   "        <span class='markerDescription'>{{point.Description}}</span><br />\n" +
+                   "        <a class='markerWikiLink' ng-show='point.Link' ng-href=\"{{point.Link}}\">Wiki:{{point.PointName}}</a><br />\n" +
+                   "        <a class='markerFoundLink' href='#' ng-click='toggleFound()' \">Mark as found</a>\n" +
+                   "    </div>";
         }
 
        function addAccordionPropertiesToCategory(category){
@@ -185,11 +201,22 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
        }
         return {
             initializePoints: function(callback){
+                var pointsFound = localStorageService.get('pointsFound');
+                if(! pointsFound){
+                    localStorageService.set('pointsFound', []);
+                    pointsFound = localStorageService.get('pointsFound');
+                }
+                else{
+
+                }
+
                 latestUpdate = new Date();
                 $http.get(settings.apiUrl + settings.mapPointsEndpoint, {
                     responseType:"json"
                 })
                     .then(function(response){
+                        var foundPoints = localStorageService.get('pointsFound');
+
                         response.data.Categories.forEach(function(item, index, array){
                             if(!item.IsDeleted){
                                 item.groups = [];
@@ -203,9 +230,9 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
                                 markersLookup[item.Id] = item;
                                 markerList.push(item);
                                 item.iconUrl = settings.markerUrl + item.IconUrl;
-                                item.iconSize = [30, 30];
+                                item.iconSize= [25,25];
                                 item.iconAnchor = [15,15];
-                                item.popupAnchor = [-3, -76];
+                                item.popupAnchor = [0, -10];
                                 //shadowUrl: 'img/leaf-shadow.png',
                                 //shadowSize:   [50, 64], // size of the shadow
                                 //shadowAnchor: [4, 62],  // the same for the shadow
@@ -216,7 +243,7 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
                                 var category = categoriesLookup[item.CategoryId];
                                 item.name = item.GroupName;
                                 item.type = 'group';
-                                item.visible = true;
+                                item.visible = item.VisibleByDefault;
                                 item.Points = [];
                                 item.Marker = markersLookup[item.MarkerId];
                                 groupsLookup[item.Id] = item;
@@ -244,18 +271,24 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
                                 item.message = getMessageTemplate();
                                 item.popupOptions = {
                                     minWidth:200,
-                                    className: "falloutMarkerPopup"
+                                    className: "falloutMarkerPopup",
+                                    permanent: item.AlwaysShowTooltip
                                 };
                                 item.compileMessage = true;
                                 item.draggable = false;
                                 item.layer = groupsLookup[item.GroupId].GroupName;
                                 item.icon = {
                                     iconUrl: settings.markerUrl + markersLookup[item.MarkerId].IconUrl,
-                                    iconSize: [30,30],
+                                    iconSize: [25,25],
                                     iconAnchor: [15,15],
-                                    popupAnchor: [0, -10]
+                                    popupAnchor: [0, -10],
+                                    className: 'markerShadow1 markerShadow2 markerShadow3'
                                 };
                                 item.Marker = markersLookup[item.MarkerId];
+                                if (pointsFound.includes(item.Id)){
+                                    item.isFound = true;
+                                    item.opacity = 0.5;
+                                }
                             }
                         });
                         callback();

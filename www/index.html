@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html ng-app="falloutApp">
     <head>
+        <meta http-equiv="Cache-control" content="No-Store">
+        <meta http-equiv="Cache-Control" content="max-age=60">
         <meta name="format-detection" content="telephone=no">
         <meta name="msapplication-tap-highlight" content="no">
         <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
@@ -17,9 +19,9 @@
         <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
         <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
         <script src="dist/angular.min.js"></script>
+        <script src="dist/angular-local-storage.js"></script>
         <script src="dist/angular-animate.min.js"></script>
-<!--        <script src="dist/leaflet.js"></script>-->
-        <script src="dist/leaflet-src.js"></script>
+        <script src="dist/leaflet.js"></script>
         <script src="dist/angular-simple-logger.min.js"></script>
         <script src="dist/ui-leaflet.js"></script>
         <script src="dist/ui-bootstrap.js"></script>
@@ -28,8 +30,7 @@
         <script src="js/constants.js"></script>
         <script src="js/Services/mapDataService.js"></script>
         <script src="js/Controllers/mainController.js"></script>
-        <script src="dist/slideout.js"></script>
-
+        <script src="js/Controllers/mapPointController.js"></script>
         <!-- <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script> -->
         <title>Fallout 76 Interactive Map Project</title>
@@ -38,11 +39,13 @@
     <body ng-controller="mainController">
         <div class="full-height box">
             <div class="horizontal-collapse" uib-collapse="sidebarIsCollapsed" horizontal>
-                <div class="headerMaterial">
-                    <img src="img/Fallout_76_logo_sm.png" ALT="Fallout 76 Map Project">
-                    <div class="subheader"> Fallout 76 Interactive Map Project<br /> <a href="https://discord.gg/eBHEHDb%22%3E">
-                        <img src="img/discord-logo.png" ALT="Join us on Discord!" height="34" width="100" style="margin:0 8px 8px 0;"> </a>
-                        <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Fallout 76 Interactive Map Project" data-url="http://www.falloutmaps.com/" data-via="SHC_Mendrak" data-hashtags="Fallout76" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                <div class="wrapper">
+                    <div class="headerMaterial">
+                        <img src="img/Fallout_76_logo_sm.png" ALT="Fallout 76 Map Project">
+                        <div class="subheader"> Fallout 76 Interactive Map Project<br /> <a href="https://discord.gg/ASAh7vV">
+                            <img src="img/discord-logo.png" ALT="Join us on Discord!" height="34" width="100" style="margin:0 8px 8px 0;"> </a>
+                            <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-text="Fallout 76 Interactive Map Project" data-url="http://www.falloutmaps.com/" data-via="SHC_Mendrak" data-hashtags="Fallout76" data-show-count="false">Tweet</a><script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+                        </div>
                     </div>
                 </div>
                 <div class="accordionContainer">
@@ -68,7 +71,9 @@
                     </uib-accordion>
                 </div>
             </div>
-            <div class="btn-default collapseButton" ng-click="sidebarIsCollapsed = !sidebarIsCollapsed">Collapse</div>
+            <div class="btn-default collapseButton" ng-click="sidebarIsCollapsed = !sidebarIsCollapsed">
+                <div class="glyphicon drawerPullIcon" ng-class="{'glyphicon-chevron-right': sidebarIsCollapsed, 'glyphicon-chevron-left': !sidebarIsCollapsed}"> </div>
+            </div>
         </div>
         <leaflet class="rowLocal content" width="100%" height="100%" layers="layers" markers="markers" maxbounds="maxbounds" defaults="defaults" lf-center="center"></leaflet>
     </body>

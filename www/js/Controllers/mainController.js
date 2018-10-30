@@ -65,8 +65,10 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
             if(layer.layer.dragging){//Its a marker
                 layer.layer.bindTooltip(layer.layer.options.PointName,{
                     direction: 'bottom',
-                    offset: L.point(0, 15)
-                })
+                    offset: L.point(0, 15),
+                    permanent: layer.layer.options.AlwaysShowTooltip,
+                    className: layer.layer.options.GroupId === 59 ? "regionTooltip" : ""
+                });
             }
         });
     });
