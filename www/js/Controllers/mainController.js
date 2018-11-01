@@ -5,6 +5,13 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
             $scope.alerts.push({msg: message, "dismiss-on-timeout": 2000, "template-url": "alert.html"});
         };
 
+        $scope.editModeEnabled = false;
+        $scope.setEditMode = function(){
+            mapDataService.points.forEach(function(element, index, array){
+                element.draggable = $scope.editModeEnabled;
+            });
+        };
+
         $scope.closeAlert = function(index) {
             $scope.alerts.splice(index, 1);
         };
@@ -48,8 +55,30 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
         });
 
         $scope.$on("leafletDirectiveMarker.dragend", function(e, args){
-            //Open reposition point confirmation
 
+            var point = args.leafletObject.options;
+            var modalInstance = $uibModal.open({
+                animation: true,
+                ariaLabelledBy: 'modal-title',
+                ariaDescribedBy: 'modal-body',
+                templateUrl: 'movePoint.html',
+                controller: 'movePointController',
+                controllerAs: '$ctrl',
+                size: "md",
+                resolve: {
+                    point: function () {
+                        return point;
+                    }
+                }
+            });
+            modalInstance.result.then(function (newPointDefinition) {
+                point.LatCoord = args.leafletEvent.target._latlng.lat;
+                point.LongCoord = args.leafletEvent.target._latlng.lng;
+                mapDataService.updatePoint(point, function(){
+                });
+            }, function () {
+                $log.info('Modal dismissed at: ' + new Date());
+            });
         });
 
         $scope.newPoint = function (parentSelector) {

@@ -38,3 +38,17 @@ falloutApp.controller('editDeletePointController', ['$uibModalInstance', 'points
         $uibModalInstance.dismiss('cancel');
     };
 }]);
+
+falloutApp.controller('movePointController', ['$uibModalInstance', 'point', function($uibModalInstance, point) {
+    var $ctrl = this;
+
+    $ctrl.pointName = point.PointName;
+
+    $ctrl.ok = function () {
+        $uibModalInstance.close();
+    };
+
+    $ctrl.cancel = function () {
+        $uibModalInstance.dismiss('cancel');
+    };
+}]);

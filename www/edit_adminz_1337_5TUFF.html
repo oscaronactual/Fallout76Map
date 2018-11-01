@@ -34,6 +34,7 @@
         <script src="js/Controllers/categoriesController.js"></script>
         <script src="js/Controllers/markersController.js"></script>
         <script src="js/Controllers/groupsController.js"></script>
+        <script src="js/Directives/angular-switch.js"></script>
         <!-- <script type="text/javascript" src="cordova.js"></script>
         <script type="text/javascript" src="js/index.js"></script> -->
         <title>Fallout 76 Interactive Map Project - Admin</title>
@@ -88,6 +89,15 @@
                 </uib-accordion>
             </div>
             <leaflet class="rowLocal content" width="100%" height="100%" layers="layers" markers="markers" maxbounds="maxbounds" defaults="defaults" lf-center="center"></leaflet>
+            <div class="mapLayerToggleContainer wrapper">
+                <div class="vertCentered">
+                    <div class="staticLabel">Static</div>
+                    <div class="editSwitch">
+                        <switch class="layerSwitch" ng-model="editModeEnabled" ng-change="setEditMode()"></switch>
+                    </div>
+                    <div class="editLabel">Edit</div>
+                </div>
+            </div>
             <script type="text/ng-template" id="newPoint.html">
                 <div class="modal-header">
                     <h3 class="modal-title" id="modal-title">Add Point</h3>
@@ -428,6 +438,18 @@
             </script>
             <script type="text/ng-template" id="alert.html">
                 <div ng-transclude></div>
+            </script>
+            <script type="text/ng-template" id="movePoint.html">
+                <div class="modal-header">
+                    <h3 class="modal-title" id="modal-title">Move Point</h3>
+                </div>
+                <div class="modal-body" id="modal-body">
+                    Are you absolutely sure you wish to move the point named {{$ctrl.point.PointName}}?
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Move</button>
+                    <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
+                </div>
             </script>
 
         </div>

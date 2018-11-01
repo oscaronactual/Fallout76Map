@@ -381,7 +381,7 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                        }
                                        testPoint.lat = item.LatCoord;
                                        testPoint.lng = item.LongCoord;
-                                       testPoint.draggable = true;
+                                       testPoint.draggable = false;
                                        testPoint.icon = {
                                            iconUrl: settings.markerUrl + markersLookup[testPoint.MarkerId].IconUrl,
                                            iconSize: [25,25],
@@ -492,7 +492,7 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                 //item.title = item.PointName;
                                 item.lat = item.LatCoord;
                                 item.lng = item.LongCoord;
-                                item.draggable = true;
+                                item.draggable = false;
                                 item.layer = groupsLookup[item.GroupId].GroupName;
                                 item.icon = {
                                     iconUrl: settings.markerUrl + markersLookup[item.MarkerId].IconUrl,
