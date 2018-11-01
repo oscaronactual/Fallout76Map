@@ -1,10 +1,20 @@
-falloutApp.controller('editDeletePointController', ['$uibModalInstance', 'pointspec', 'mapDataService', function($uibModalInstance, pointspec, mapDataService) {
+falloutApp.controller('editDeletePointController', ['$uibModalInstance', 'pointspec', 'mapDataService', 'settings', function($uibModalInstance, pointspec, mapDataService, settings) {
     var $ctrl = this;
 
     $ctrl.pointName = pointspec.PointName;
     $ctrl.link = pointspec.Link;
     $ctrl.description = pointspec.Description;
-
+    $ctrl.markerId = pointspec.MarkerId;
+    $ctrl.groupId = pointspec.GroupId;
+    $ctrl.groups = mapDataService.groupList;
+    $ctrl.markers = mapDataService.markers;
+    $ctrl.markersLookup = mapDataService.markersLookup;
+    $ctrl.iconUrl = function(){
+        var marker = $ctrl.markersLookup[$ctrl.markerId];
+        if(marker){
+            return settings.markerUrl + marker.IconUrl;
+        }else{return '';}
+    };
     $ctrl.ok = function () {
         mapDataService.updatePoint({
             pointId: pointspec.Id,
@@ -13,8 +23,8 @@ falloutApp.controller('editDeletePointController', ['$uibModalInstance', 'points
             link: $ctrl.link,
             lat: pointspec.lat,
             lng: pointspec.lng,
-            GroupId: pointspec.GroupId,
-            MarkerId: pointspec.MarkerId
+            GroupId: $ctrl.groupId,
+            MarkerId: $ctrl.markerId
         });
         $uibModalInstance.close();
     };

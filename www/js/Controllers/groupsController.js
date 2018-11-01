@@ -1,13 +1,15 @@
 falloutApp.controller('groupsController', ['$uibModalInstance', 'mapDataService', '$document','$uibModal','settings', function($uibModalInstance, mapDataService, $document,$uibModal,settings) {
     var $ctrl = this;
     $ctrl.groups = mapDataService.groupList;
-    $ctrl.Markers = mapDataService.markersLookup;
-    $ctrl.Categories = mapDataService.categoriesLookup;
+    $ctrl.Markers = mapDataService.markers;
+    $ctrl.markersLookup = mapDataService.markersLookup;
+    $ctrl.Categories = mapDataService.categories;
+    $ctrl.categoriesLookup = mapDataService.categoriesLookup;
     $ctrl.getCategoryName = function(group){
-        return $ctrl.Categories[group.CategoryId].CategoryName;
+        return $ctrl.categoriesLookup[group.CategoryId].CategoryName;
     };
     $ctrl.markerIcon = function(group){
-        return settings.markerUrl + $ctrl.Markers[group.MarkerId].IconUrl;
+        return settings.markerUrl + $ctrl.markersLookup[group.MarkerId].IconUrl;
     };
     $ctrl.newGroup = function(parentSelector){
         var modalInstance = $uibModal.open({
@@ -70,10 +72,12 @@ falloutApp.controller('newGroupController', ['$uibModalInstance', 'mapDataServic
     $ctrl.groupName = "";
     $ctrl.categoryId = 0;
     $ctrl.markerId = 0;
-    $ctrl.Markers = mapDataService.markersLookup;
-    $ctrl.Categories = mapDataService.categoriesLookup;
+    $ctrl.Markers = mapDataService.markers;
+    $ctrl.markersLookup = mapDataService.markersLookup;
+    $ctrl.Categories = mapDataService.categories;
+    $ctrl.categoriesLookup = mapDataService.categoriesLookup;
     $ctrl.getIcon = function(){
-        return settings.markerUrl + $ctrl.Markers[$ctrl.markerId].IconUrl;
+        return settings.markerUrl + $ctrl.markersLookup[$ctrl.markerId].IconUrl;
     };
 
     $ctrl.ok = function () {
@@ -96,10 +100,12 @@ falloutApp.controller('updateGroupController', ['$uibModalInstance', 'mapDataSer
     $ctrl.groupName = groupToUpdate.GroupName;
     $ctrl.categoryId = groupToUpdate.CategoryId;
     $ctrl.markerId = groupToUpdate.MarkerId;
-    $ctrl.Markers = mapDataService.markersLookup;
-    $ctrl.Categories = mapDataService.categoriesLookup;
+    $ctrl.Markers = mapDataService.markers;
+    $ctrl.markersLookup = mapDataService.markersLookup;
+    $ctrl.Categories = mapDataService.categories;
+    $ctrl.categoriesLookup = mapDataService.categoriesLookup;
     $ctrl.getIcon = function(){
-        return settings.markerUrl + $ctrl.Markers[$ctrl.markerId].IconUrl;
+        return settings.markerUrl + $ctrl.markersLookup[$ctrl.markerId].IconUrl;
     };
 
     $ctrl.ok = function () {

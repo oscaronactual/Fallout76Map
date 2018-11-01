@@ -6,12 +6,13 @@ falloutApp.controller('newPointController', ['$uibModalInstance', 'location', 'm
     $ctrl.description = '';
     $ctrl.markerId = 0;
     $ctrl.groupId = 0;
-    $ctrl.groups = mapDataService.groupsLookup;
-    $ctrl.markers = mapDataService.markersLookup;
+    $ctrl.groups = mapDataService.groupList;
+    $ctrl.markers = mapDataService.markers;
+    $ctrl.markersLookup = mapDataService.markersLookup;
     $ctrl.iconUrl = function(){
-        var marker = $ctrl.markers[$ctrl.markerId];
+        var marker = $ctrl.markersLookup[$ctrl.markerId];
         if(marker){
-            return settings.markerUrl + $ctrl.markers[$ctrl.markerId].IconUrl;
+            return settings.markerUrl + marker.IconUrl;
         }else{return '';}
     };
     $ctrl.ok = function () {

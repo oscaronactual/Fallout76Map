@@ -86,7 +86,7 @@ falloutApp.controller('updateMarkerController', ['$uibModalInstance', 'mapDataSe
     var $ctrl = this;
     $ctrl.markerToEdit = markerToEdit;
     $ctrl.markerName = markerToEdit.MarkerName;
-    $ctrl.iconUrl = markerToEdit.iconUrl;
+    $ctrl.iconUrl = markerToEdit.IconUrl;
     $ctrl.getIcon = function(){
         return settings.markerUrl + $ctrl.iconUrl;
     };

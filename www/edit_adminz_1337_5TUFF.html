@@ -107,14 +107,14 @@
                            <input type="text" class="form-control" id="pointLink" ng-model="$ctrl.link" placeholder="http://fallout76wiki.com/MyPoint">
                        </div>
                        <div class="form-group">
-                           <label for="category">Group</label>
-                           <select name="category" ng-model="$ctrl.groupId">
-                               <option ng-repeat="group in $ctrl.groups" value="{{group.Id}}">{{group.GroupName}}</option>
+                           <label for="groupId">Group</label>
+                           <select name="groupId" ng-model="$ctrl.groupId" ng-options="group.Id as group.GroupName for group in $ctrl.groups  | orderBy:'GroupName'">
+                               <!--<option ng-repeat="group in $ctrl.groups" value="{{group.Id}}">{{group.GroupName}}</option>-->
                            </select>
                        </div>
                        <div class="form-group">
                            <label for="markerIcon">Marker Icon</label>
-                           <select name="markerIcon" ng-model="$ctrl.markerId">
+                           <select name="markerIcon" ng-model="$ctrl.markerId" ng-options="marker.Id as marker.MarkerName for marker in $ctrl.markers  | orderBy:'MarkerName'">
                                <option ng-repeat="marker in $ctrl.markers" value="{{marker.Id}}">{{marker.MarkerName}}</option>
                            </select>
                        </div>
@@ -146,6 +146,21 @@
                             <label for="pointLink">Link</label>
                             <input type="text" class="form-control" id="pointLink" ng-model="$ctrl.link" placeholder="http://fallout76wiki.com/MyPoint">
                         </div>
+                        <div class="form-group">
+                            <label for="groupId">Group</label>
+                            <select name="groupId" ng-model="$ctrl.groupId" ng-options="group.Id as group.GroupName for group in $ctrl.groups  | orderBy:'GroupName'">
+                                <!--<option ng-repeat="group in $ctrl.groups" value="{{group.Id}}">{{group.GroupName}}</option>-->
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="markerIcon">Marker Icon</label>
+                            <select name="markerIcon" ng-model="$ctrl.markerId" ng-options="marker.Id as marker.MarkerName for marker in $ctrl.markers  | orderBy:'MarkerName'">
+                                <option ng-repeat="marker in $ctrl.markers" value="{{marker.Id}}">{{marker.MarkerName}}</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <img ng-src="{{$ctrl.iconUrl()}}"/>
+                        </div>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -167,7 +182,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="category in $ctrl.categories">
+                            <tr ng-repeat="category in $ctrl.categories | orderBy:'CategoryName'">
                                 <td>{{category.CategoryName}}</td>
                                 <td>
                                     <a href="#" ng-click="$ctrl.updateCategory(category)">Update</a> | <a href="#" ng-click="$ctrl.deleteCategory(category)">Delete</a>
@@ -363,13 +378,13 @@
                         <div class="form-group">
                             <label for="markerIcon">Marker Icon</label>
                             <select name="markerIcon" ng-model="$ctrl.markerId">
-                                <option ng-repeat="marker in $ctrl.Markers" value="{{marker.Id}}">{{marker.MarkerName}}</option>
+                                <option ng-repeat="marker in $ctrl.Markers | orderBy:'MarkerName'" value="{{marker.Id}}">{{marker.MarkerName}}</option>
                             </select>
                         </div>
                         <div class="form-group">
                             <label for="category">Category</label>
                             <select name="category" ng-model="$ctrl.categoryId">
-                                <option ng-repeat="category in $ctrl.Categories" value="{{category.Id}}">{{category.CategoryName}}</option>
+                                <option ng-repeat="category in $ctrl.Categories | orderBy:'CategoryName'" value="{{category.Id}}">{{category.CategoryName}}</option>
                             </select>
                         </div>
                         <div class="form-group">
@@ -394,14 +409,11 @@
                         </div>
                         <div class="form-group">
                             <label for="markerIcon">Marker Icon</label>
-                            <select name="markerIcon" ng-model="$ctrl.markerId">
-                                <option ng-repeat="marker in $ctrl.Markers" value="{{marker.Id}}">{{marker.MarkerName}}</option>
+                            <select name="markerIcon" ng-model="$ctrl.markerId" ng-options="marker.Id as marker.MarkerName for marker in $ctrl.Markers | orderBy:'MarkerName'">
                             </select>
-                        </div>
                         <div class="form-group">
                             <label for="category">Category</label>
-                            <select name="category" ng-model="$ctrl.categoryId">
-                                <option ng-repeat="category in $ctrl.Categories" value="{{category.Id}}">{{category.CategoryName}}</option>
+                            <select name="category" ng-model="$ctrl.categoryId" ng-options="category.Id as category.CategoryName for category in $ctrl.Categories | orderBy:'CategoryName'">
                             </select>
                         </div>
                         <div class="form-group">
