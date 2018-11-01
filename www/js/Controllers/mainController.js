@@ -18,6 +18,32 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
             }
         };
 
+
+
+        $scope.definedLayers = {
+            gameMap: {
+                name: 'Fallout76 MapTiles',
+                url: 'http://d2upr4z2n1fxid.cloudfront.net/{z}/{x}/{y}.png',
+                layerParams:{
+                    errorTileUrl: 'https://s3-us-west-1.amazonaws.com/fallout76maptiles/emptyTile.png',
+                    noWrap: true,
+                    maxZoom:8,
+                    minZoom:3
+                },
+                type: 'xyz'
+            },vector: {
+                name: 'Fallout76 Topo',
+                url: 'http://dfxypv9w3yb1b.cloudfront.net/{z}/{x}/{y}.png',
+                layerParams:{
+                    errorTileUrl: 'https://s3-us-west-1.amazonaws.com/fallout76maptiles/emptyTile.png',
+                    noWrap: true,
+                    maxZoom:8,
+                    minZoom:3
+                },
+                type: 'xyz'
+            }
+        };
+
         $scope.$on("leafletDirectiveMap.mousemove", function(e, args){
             $scope.currentLat = args.leafletEvent.latlng.lat;
             $scope.currentLong = args.leafletEvent.latlng.lng;
@@ -31,7 +57,8 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
             },
             layers: {
                 baselayers: {
-                    xyz: {
+                    currentLayer:$scope.definedLayers["gameMap"]
+                    /*gameMap: {
                         name: 'Fallout76 MapTiles',
                         url: 'http://d2upr4z2n1fxid.cloudfront.net/{z}/{x}/{y}.png',
                         layerParams:{
@@ -41,7 +68,17 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
                             minZoom:3
                         },
                         type: 'xyz'
-                    }
+                    },vector: {
+                        name: 'Fallout76 Topo',
+                        url: 'http://dfxypv9w3yb1b.cloudfront.net/{z}/{x}/{y}.png',
+                        layerParams:{
+                            errorTileUrl: 'https://s3-us-west-1.amazonaws.com/fallout76maptiles/emptyTile.png',
+                            noWrap: true,
+                            maxZoom:8,
+                            minZoom:3
+                        },
+                        type: 'xyz'
+                    }*/
                 },
                 overlays: $scope.markerLayers
             },
@@ -59,6 +96,29 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
          }
     };
     $scope.initialize();
+
+    $scope.gameMapIsCurrent = true;
+    $scope.changeCallback = function(){
+        if ($scope.gameMapIsCurrent){
+            $scope.setLayerCurrent("gameMap");
+            $scope.gameMapIsCurrent = true;
+        } else{
+            $scope.setLayerCurrent("vector");
+            $scope.gameMapIsCurrent = false;
+        }
+    };
+
+    $scope.setLayerCurrent = function(layerName) {
+
+        var baselayers = $scope.layers.baselayers;
+        for (var property in baselayers){
+            if (baselayers.hasOwnProperty(property)){
+                delete baselayers[property];
+            }
+        }
+
+        baselayers[layerName] = $scope.definedLayers[layerName];
+    };
 
     leafletData.getMap().then(function(map){
         map.on("layeradd", function(layer){

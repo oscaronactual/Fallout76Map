@@ -1,4 +1,4 @@
-var falloutApp = angular.module("falloutApp", ['ui-leaflet', 'ui.bootstrap', 'ngAnimate','LocalStorageModule']);
+var falloutApp = angular.module("falloutApp", ['ui-leaflet', 'ui.bootstrap', 'ngAnimate','LocalStorageModule', 'uiSwitch']);
 
 falloutApp.config(function(localStorageServiceProvider){
     localStorageServiceProvider
