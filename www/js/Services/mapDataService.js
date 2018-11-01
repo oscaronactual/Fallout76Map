@@ -126,7 +126,7 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
                                        testPoint.lng = item.LongCoord;
                                        testPoint.draggable = false;
                                        testPoint.icon = {
-                                           iconUrl: settings.markerUrl + markersLookup[testPoint.MarkerId].IconUrl,
+                                           iconUrl: settings.markerUrl + markersLookup[item.MarkerId].IconUrl,
                                            iconSize: [25,25],
                                            iconAnchor: [15,15],
                                            popupAnchor: [0, -10]
