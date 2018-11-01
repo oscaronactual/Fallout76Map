@@ -34,9 +34,9 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                    newPoint.layer = groupsLookup[newPoint.GroupId].GroupName;
                    newPoint.icon = {
                        iconUrl: settings.markerUrl + markersLookup[newPoint.MarkerId].IconUrl,
-                       iconSize: [36,36],
-                       iconAnchor: [18,18],
-                       popupAnchor: [-3, -76]
+                       iconSize: [25,25],
+                       iconAnchor: [15,15],
+                       popupAnchor: [0, -10]
                    };
                    pointLookup[newPoint.Id] = newPoint;
                    groupsLookup[newPoint.GroupId].Points.push(pointLookup[newPoint.Id]);
@@ -100,9 +100,9 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
            oldPoint.layer = groupsLookup[newPoint.GroupId].GroupName;
            oldPoint.icon = {
                iconUrl: 'markers/' + markersLookup[newPoint.MarkerId].IconUrl,
-               iconSize: [36,36],
-               iconAnchor: [18,18],
-               popupAnchor: [-3, -76]
+               iconSize: [25,25],
+               iconAnchor: [15,15],
+               popupAnchor: [0, -10]
            }
        }
 
@@ -234,9 +234,9 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                    var permMarker = markersLookup[tempMarker.Id] = tempMarker;
                    markerList.push(tempMarker);
                    permMarker.iconUrl='markers/' + permMarker.IconUrl;
-                   permMarker.iconSize = [38, 95];
-                   permMarker.iconAnchor= [22, 94];
-                   permMarker.popupAnchor= [-3, -76];
+                   permMarker.iconSize= [25,25];
+                   permMarker.iconAnchor = [15,15];
+                   permMarker.popupAnchor = [0, -10];
                })
                .then(function(response){});
        }
@@ -309,9 +309,9 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                 else{
                                        markersLookup[item.Id] = item;
                                        item.iconUrl= settings.markerUrl + markersLookup[item.MarkerId].IconUrl;
-                                       item.iconSize = [38, 95];
-                                       item.iconAnchor= [22, 94];
-                                       item.popupAnchor= [-3, -76];
+                                       item.iconSize= [25,25];
+                                       item.iconAnchor = [15,15];
+                                       item.popupAnchor = [0, -10];
                                    }
                                }else{
                                    if(markersLookup[item.Id]){
@@ -384,9 +384,9 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                        testPoint.draggable = true;
                                        testPoint.icon = {
                                            iconUrl: settings.markerUrl + markersLookup[testPoint.MarkerId].IconUrl,
-                                           iconSize: [30,30],
+                                           iconSize: [25,25],
                                            iconAnchor: [15,15],
-                                           popupAnchor: [-3, -76]
+                                           popupAnchor: [0, -10]
                                        };
 
                                    }
@@ -401,9 +401,9 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                        item.layer = groupsLookup[item.GroupId].GroupName;
                                        item.icon = {
                                            iconUrl: settings.markerUrl + markersLookup[item.MarkerId].IconUrl,
-                                           iconSize: [30,30],
+                                           iconSize: [25,25],
                                            iconAnchor: [15,15],
-                                           popupAnchor: [-3, -76]
+                                           popupAnchor: [0, -10]
                                        };
                                        item.Marker = markersLookup[item.MarkerId];
                                    }
@@ -461,9 +461,9 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                 markersLookup[item.Id] = item;
                                 markerList.push(item);
                                 item.iconUrl = settings.markerUrl + item.IconUrl;
-                                item.iconSize = [30, 30];
+                                item.iconSize= [25,25];
                                 item.iconAnchor = [15,15];
-                                item.popupAnchor = [-3, -76];
+                                item.popupAnchor = [0, -10];
                                 //shadowUrl: 'img/leaf-shadow.png',
                                 //shadowSize:   [50, 64], // size of the shadow
                                 //shadowAnchor: [4, 62],  // the same for the shadow
@@ -496,9 +496,9 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                 item.layer = groupsLookup[item.GroupId].GroupName;
                                 item.icon = {
                                     iconUrl: settings.markerUrl + markersLookup[item.MarkerId].IconUrl,
-                                    iconSize: [30,30],
+                                    iconSize: [25,25],
                                     iconAnchor: [15,15],
-                                    popupAnchor: [-3, -76]
+                                    popupAnchor: [0, -10]
                                 };
                                 item.Marker = markersLookup[item.MarkerId];
                             }
