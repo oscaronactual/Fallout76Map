@@ -89,13 +89,20 @@
                 </uib-accordion>
             </div>
             <leaflet class="rowLocal content" width="100%" height="100%" layers="layers" markers="markers" maxbounds="maxbounds" defaults="defaults" lf-center="center"></leaflet>
-            <div class="mapLayerToggleContainer wrapper">
-                <div class="vertCentered">
-                    <div class="staticLabel">Static</div>
-                    <div class="editSwitch">
+            <div class="mapLayerToggleContainer container">
+                <div class="row">
+                    <div class="staticLabel col-md-3">Static</div>
+                    <div class="editSwitch col-md-3">
                         <switch class="layerSwitch" ng-model="editModeEnabled" ng-change="setEditMode()"></switch>
                     </div>
-                    <div class="editLabel">Edit</div>
+                    <div class="editLabel col-md-3">Edit</div>
+                </div>
+                <div class="row">
+                    <div class="staticLabel col-md-3">Scan</div>
+                    <div class="editSwitch col-md-3">
+                        <switch class="layerSwitch" ng-model="newMapIsCurrent" ng-change="toggleCurrentLayer()"></switch>
+                    </div>
+                    <div class="editLabel col-md-3">In-Game</div>
                 </div>
             </div>
             <script type="text/ng-template" id="newPoint.html">

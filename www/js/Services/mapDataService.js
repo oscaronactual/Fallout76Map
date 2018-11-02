@@ -303,6 +303,10 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                    if(markersLookup[item.Id]){
                                        var marker = markersLookup[item.Id];
                                        if(marker.ModifiedDate < item.ModifiedDate){
+                                           item.iconUrl= settings.markerUrl + markersLookup[item.MarkerId].IconUrl;
+                                           item.iconSize= [25,25];
+                                           item.iconAnchor = [15,15];
+                                           item.popupAnchor = [0, -10];
                                            markersLookup[item.Id] = item;
                                        }
                                    }

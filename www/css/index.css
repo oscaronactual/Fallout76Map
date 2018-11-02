@@ -270,7 +270,7 @@ div.wrapper{
     right:20px;
     top:20px;
     height: 65px;
-    width: 200px;
+    width: 200px !important;
     position: absolute;
     z-index: 1000;
     background-color: RGBA(0,0,0,.5);
