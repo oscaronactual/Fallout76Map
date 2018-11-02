@@ -115,6 +115,56 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
         });
     };
 
+
+    $scope.definedLayers = {
+        oldMap: {
+            name: 'Fallout76 MapTiles',
+            url: 'http://d2upr4z2n1fxid.cloudfront.net/{z}/{x}/{y}.png',
+            layerParams:{
+                errorTileUrl: 'https://s3-us-west-1.amazonaws.com/fallout76maptiles/emptyTile.png',
+                noWrap: true,
+                maxZoom:8,
+                minZoom:3
+            },
+            type: 'xyz'
+        },newMap: {
+            name: 'Fallout76 New',
+            url: 'http://d1sv6jqpfm1rn8.cloudfront.net/{z}/{x}/{y}.png',
+            layerParams:{
+                errorTileUrl: 'https://s3-us-west-1.amazonaws.com/fallout76maptiles/emptyTile.png',
+                noWrap: true,
+                maxZoom:8,
+                minZoom:3
+            },
+            type: 'xyz'
+        }
+    };
+
+    $scope.newMapIsCurrent = false;
+    $scope.toggleCurrentLayer = function(){
+        if ($scope.newMapIsCurrent){
+            $scope.setLayerCurrent("newMap");
+            $scope.gameMapIsCurrent = false;
+        } else{
+            $scope.setLayerCurrent("oldMap");
+            $scope.gameMapIsCurrent = true;
+        }
+    };
+
+    $scope.setLayerCurrent = function(layerName) {
+
+        var baselayers = $scope.layers.baselayers;
+        for (var property in baselayers){
+            if (baselayers.hasOwnProperty(property)){
+                delete baselayers[property];
+            }
+        }
+
+        baselayers[layerName] = $scope.definedLayers[layerName];
+    };
+
+
+
     $scope.initialize = function(){
         $scope.alerts = [];$scope.editModeEnabled = false;
         $scope.categories = mapDataService.categories;
@@ -158,7 +208,7 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
         });
 
         $scope.$on("leafletDirectiveMarker.dragend", function(e, args){
-//http://fallout76map.s3-website-us-east-1.amazonaws.com
+
             var point = args.leafletObject.options;
             var modalInstance = $uibModal.open({
                 animation: true,
@@ -192,17 +242,7 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
             },
             layers: {
                 baselayers: {
-                    xyz: {
-                        name: 'Fallout76 MapTiles',
-                        url: 'http://d2upr4z2n1fxid.cloudfront.net/{z}/{x}/{y}.png',
-                        layerParams:{
-                            errorTileUrl: 'https://s3-us-west-1.amazonaws.com/fallout76maptiles/emptyTile.png',
-                            noWrap: true,
-                            maxZoom:8,
-                            minZoom:3
-                        },
-                        type: 'xyz'
-                    }
+                    currentLayer:$scope.definedLayers["oldMap"]
                 },
                 overlays: $scope.markerLayers
             },

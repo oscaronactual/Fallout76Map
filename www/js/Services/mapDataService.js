@@ -59,24 +59,24 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
        }
        function updatePoint(point){
            var payload = {
-               Id: point.pointId,
-               PointName: point.pointName,
-               LatCoord: point.lat,
-               LongCoord: point.lng,
-               Link: point.link,
-               Description: point.description,
+               Id: point.Id,
+               PointName: point.PointName,
+               LatCoord: point.LatCoord,
+               LongCoord: point.LongCoord,
+               Link: point.Link,
+               Description: point.Description,
                GroupId: point.GroupId,
                MarkerId: point.MarkerId
            };
-           $http.put(settings.apiUrl + settings.mapPointsEndpoint + point.pointId, payload)
+           $http.put(settings.apiUrl + settings.mapPointsEndpoint + payload.Id, payload)
                .then(function(response){
                    if(response.data === ""){ //api returns empty set when successful
-                       var lookupPoint = pointLookup[point.pointId];
+                       var lookupPoint = pointLookup[point.Id];
                        var groupPoint = groupsLookup[point.GroupId].Points.find(function(element){
-                           return element.Id === point.pointId;
+                           return element.Id === point.Id;
                        });
                        var ungroupPoint = pointsUngrouped.find(function(element){
-                           return element.Id === point.pointId;
+                           return element.Id === point.Id;
                        });
                        copyPointVals(lookupPoint, point);
                        copyPointVals(groupPoint, point);
@@ -88,15 +88,15 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
 
        function copyPointVals(oldPoint, newPoint){
            oldPoint.PointName = newPoint.PointName;
-           oldPoint.LatCoord = newPoint.lat;
-           oldPoint.LongCoord = newPoint.lng;
-           oldPoint.Link = newPoint.link;
-           oldPoint.Description = newPoint.description;
+           oldPoint.LatCoord = newPoint.LatCoord;
+           oldPoint.LongCoord = newPoint.LongCoord;
+           oldPoint.Link = newPoint.Link;
+           oldPoint.Description = newPoint.Description;
            oldPoint.GroupId = newPoint.GroupId;
            oldPoint.MarkerId = newPoint.MarkerId;
            oldPoint.title = newPoint.PointName;
-           oldPoint.lat = newPoint.lat;
-           oldPoint.lng = newPoint.lng;
+           oldPoint.lat = newPoint.LatCoord;
+           oldPoint.lng = newPoint.LongCoord;
            oldPoint.layer = groupsLookup[newPoint.GroupId].GroupName;
            oldPoint.icon = {
                iconUrl: 'markers/' + markersLookup[newPoint.MarkerId].IconUrl,
