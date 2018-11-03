@@ -41,7 +41,7 @@ body {
     height:100%;
     margin:0px;
     padding:0px;
-/*    text-transform:uppercase;*/
+    /*    text-transform:uppercase;*/
     width:100%;
 }
 
@@ -515,4 +515,8 @@ a.markerFoundLink{
 .inGameMapLabel{
     float:right;
     margin-right: 20px;
+}
+
+.btn-default.collapseButton:hover, .btn-default.collapseButton:focus {
+    background-color: #000 !important;
 }
