@@ -61,9 +61,6 @@
                     </ul>
                 </div>
             </nav>
-            <div class="toaster">
-                <div uib-alert ng-repeat="alert in alerts" ng-class="'alert-' + (alert.type || 'warning')" close="closeAlert($index)">{{alert.msg}}</div>
-            </div>
             <div class="accordionContainer">
                 <uib-accordion close-others="true">
                     <div uib-accordion-group class="panel-default" ng-repeat="category in categories" is-open="category.isOpen">
@@ -442,9 +439,6 @@
                     <button class="btn btn-primary" type="button" ng-click="$ctrl.ok()">Update</button>
                     <button class="btn btn-warning" type="button" ng-click="$ctrl.cancel()">Cancel</button>
                 </div>
-            </script>
-            <script type="text/ng-template" id="alert.html">
-                <div ng-transclude></div>
             </script>
             <script type="text/ng-template" id="movePoint.html">
                 <div class="modal-header">

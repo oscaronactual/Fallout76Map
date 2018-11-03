@@ -1,16 +1,9 @@
 falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leafletMapEvents', 'mapDataService','$uibModal', 'leafletData','$log', 'settings', function($scope, leafletBoundsHelpers,leafletMapEvents, mapDataService, $uibModal, leafletData, $log, settings) {
 
-    $scope.addAlert = function(message) {
-        $scope.alerts.push({msg: message, "dismiss-on-timeout": 2000, "template-url": "alert.html"});
-    };
-
     $scope.setEditMode = function(){
         mapDataService.points.forEach(function(element, index, array){
             element.draggable = $scope.editModeEnabled;
         });
-    };
-    $scope.closeAlert = function(index) {
-        $scope.alerts.splice(index, 1);
     };
 
     $scope.newPoint = function (parentSelector) {
@@ -34,7 +27,6 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
 
         modalInstance.result.then(function (newPointDefinition) {
             mapDataService.addPoint(newPointDefinition, function(){
-                $scope.addAlert("New Point Added")
             });
         }, function () {
             $log.info('Modal dismissed at: ' + new Date());
@@ -178,7 +170,7 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
     });
 
     $scope.initialize = function(){
-        $scope.alerts = [];$scope.editModeEnabled = false;
+        $scope.editModeEnabled = false;
         $scope.categories = mapDataService.categories;
         $scope.pointGroups = mapDataService.groupedPoints;
         $scope.markerLayers = {};
