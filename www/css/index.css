@@ -171,12 +171,12 @@ html, .full-height{
     display:none !important;
 }
 
-.markerShadow2 {
+/*.markerShadow2 {
     filter: drop-shadow(-1px -1px 1px #000); }
 
 .leaflet-marker-pane {
     filter: drop-shadow(4px 4px 1px #000);
-    }
+    }*/
 
 .leaflet-tooltip{
     text-align: center;
@@ -226,7 +226,7 @@ html, .full-height{
 }
 
 .pill{
-    background-color: #FFE082;
+    background-color: rgb(255, 224, 130);
     box-shadow: 1px 1px 3px #000 inset;
     margin-left: 5px;
     padding: 2px 3px 0 4px;
@@ -405,22 +405,23 @@ a.markerFoundLink{
 .mapLayerToggleContainer{
     right:20px;
     top:20px;
-    height: 65px;
-    width: 200px;
+    height: 45px;
+    width: 180px;
     position: absolute;
     z-index: 1000;
     background-color: RGBA(0,0,0,.5);
+    border-radius: 6px;
 }
 
 .switch {
-    background: #fff;
-    border: 1px solid #dfdfdf;
+    background: #ffe082;
+    border: 1px solid #000000;
     position: relative;
     display: inline-block;
     box-sizing: content-box;
     overflow: visible;
-    width: 52px;
-    height: 30px;
+    width: 37px;
+    height: 15px;
     padding: 0px;
     margin: 0px;
     border-radius: 20px;
@@ -435,11 +436,12 @@ a.markerFoundLink{
     width:80px;
 }
 .switch small {
-    background: #fff;
+    background: rgba(140, 181, 230, 1);
     border-radius: 100%;
+    border: 1px black;
     box-shadow: 0 1px 3px rgba(0,0,0,0.4);
-    width: 30px;
-    height: 30px;
+    width: 15px;
+    height: 15px;
     position: absolute;
     top: 0px;
     left: 0px;
@@ -447,11 +449,12 @@ a.markerFoundLink{
     -webkit-transition: 0.3s ease-out all;
 }
 .switch.checked {
-    background: rgb(100, 189, 99);
-    border-color: rgb(100, 189, 99);
+    background: rgba(140, 181, 230, 1);
+    border-color: rgba(140, 181, 230, 1);
 }
 .switch.checked small {
     left: 22px;
+    background-color: #ffe082;
 }
 /*wider switch text moves small further to the right*/
 .switch.wide.checked small {
@@ -497,6 +500,7 @@ a.markerFoundLink{
 
 .layerSwitch{
     display:inline-block;
+    /* margin-left: -10px; */
 }
 
 .vertCentered{
@@ -506,9 +510,9 @@ a.markerFoundLink{
 }
 .vectorLabel{
     float:left;
-    margin-left: 10px;
+    margin-left: 20px;
 }
 .inGameMapLabel{
     float:right;
-    margin-right: 10px;
+    margin-right: 20px;
 }

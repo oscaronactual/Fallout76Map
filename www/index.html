@@ -69,15 +69,6 @@
                                 </div>
                             </div>
                         </div>
-                        <div uib-accordion-group class="panel-default" isOpen="false">
-                            <uib-accordion-heading>
-                                Map Options
-                            </uib-accordion-heading>
-                            <div class="">
-                                <button ng-click="setLayerCurrent('gameMap')">Game Map</button>
-                                <button ng-click="setLayerCurrent('vector')">Topo Map</button>
-                            </div>
-                        </div>
                     </uib-accordion>
                 </div>
             </div>
@@ -87,11 +78,11 @@
         </div>
         <div class="mapLayerToggleContainer wrapper">
             <div class="vertCentered">
-                <div class="vectorLabel">Vector</div>
+                <div class="vectorLabel">Military</div>
                 <div class="layerSwitch">
                     <switch class="layerSwitch" ng-model="gameMapIsCurrent" ng-change="changeCallback"></switch>
                 </div>
-                <div class="inGameMapLabel">In-Game</div>
+                <div class="inGameMapLabel">Kitsch</div>
             </div>
         </div>
         <leaflet class="rowLocal content" width="100%" height="100%" layers="layers" markers="markers" maxbounds="maxbounds" defaults="defaults" lf-center="center"></leaflet>
