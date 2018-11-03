@@ -163,7 +163,18 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
         baselayers[layerName] = $scope.definedLayers[layerName];
     };
 
-
+    leafletData.getMap().then(function(map){
+        map.on("layeradd", function(layer){
+            if(layer.layer.dragging){//Its a marker
+                layer.layer.bindTooltip(layer.layer.options.PointName,{
+                    direction: 'bottom',
+                    offset: L.point(0, 15),
+                    permanent: layer.layer.options.AlwaysShowTooltip,
+                    className: layer.layer.options.GroupId === 59 ? "regionTooltip" : ""
+                });
+            }
+        });
+    });
 
     $scope.initialize = function(){
         $scope.alerts = [];$scope.editModeEnabled = false;

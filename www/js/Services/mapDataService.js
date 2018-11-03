@@ -66,7 +66,8 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                Link: point.Link,
                Description: point.Description,
                GroupId: point.GroupId,
-               MarkerId: point.MarkerId
+               MarkerId: point.MarkerId,
+               AlwaysShowTooltip: point.AlwaysShowTooltip
            };
            $http.put(settings.apiUrl + settings.mapPointsEndpoint + payload.Id, payload)
                .then(function(response){
@@ -385,6 +386,11 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                        }
                                        testPoint.lat = item.LatCoord;
                                        testPoint.lng = item.LongCoord;
+                                       testPoint.popupOptions = {
+                                           minWidth:200,
+                                           className: "falloutMarkerPopup",
+                                           permanent: item.AlwaysShowTooltip
+                                       };
                                        testPoint.draggable = false;
                                        testPoint.icon = {
                                            iconUrl: settings.markerUrl + markersLookup[item.MarkerId].IconUrl,
@@ -403,6 +409,11 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                        item.lng = item.LongCoord;
                                        item.draggable = true;
                                        item.layer = groupsLookup[item.GroupId].GroupName;
+                                       testPoint.popupOptions = {
+                                           minWidth:200,
+                                           className: "falloutMarkerPopup",
+                                           permanent: item.AlwaysShowTooltip
+                                       };
                                        item.icon = {
                                            iconUrl: settings.markerUrl + markersLookup[item.MarkerId].IconUrl,
                                            iconSize: [25,25],
@@ -498,6 +509,11 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                 item.lng = item.LongCoord;
                                 item.draggable = false;
                                 item.layer = groupsLookup[item.GroupId].GroupName;
+                                item.popupOptions = {
+                                    minWidth:200,
+                                    className: "falloutMarkerPopup",
+                                    permanent: item.AlwaysShowTooltip
+                                };
                                 item.icon = {
                                     iconUrl: settings.markerUrl + markersLookup[item.MarkerId].IconUrl,
                                     iconSize: [25,25],
