@@ -17,14 +17,15 @@ falloutApp.controller('editDeletePointController', ['$uibModalInstance', 'points
     };
     $ctrl.ok = function () {
         mapDataService.updatePoint({
-            pointId: pointspec.Id,
-            pointName: $ctrl.pointName,
-            description: $ctrl.description,
-            link: $ctrl.link,
-            lat: pointspec.lat,
-            lng: pointspec.lng,
+            Id: pointspec.Id,
+            PointName: $ctrl.pointName,
+            Description: $ctrl.description,
+            Link: $ctrl.link,
+            LatCoord: pointspec.lat,
+            LongCoord: pointspec.lng,
             GroupId: $ctrl.groupId,
-            MarkerId: $ctrl.markerId
+            MarkerId: $ctrl.markerId,
+            AlwaysShowTooltip: pointspec.AlwaysShowToolTip
         });
         $uibModalInstance.close();
     };

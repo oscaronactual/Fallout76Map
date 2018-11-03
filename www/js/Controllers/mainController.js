@@ -71,7 +71,8 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
     });
 
     $scope.getMarkerUrl = function(marker){
-        return settings.markerUrl + marker.IconUrl;
+        var url = marker ? marker.IconUrl : "";
+        return settings.markerUrl + url;
     };
 
     $scope.setGroupStates = function(group){
@@ -119,7 +120,7 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
     $scope.definedLayers = {
         oldMap: {
             name: 'Fallout76 MapTiles',
-            url: 'http://d2upr4z2n1fxid.cloudfront.net/{z}/{x}/{y}.png',
+            url: 'http://d1sv6jqpfm1rn8.cloudfront.net/{z}/{x}/{y}.png',
             layerParams:{
                 errorTileUrl: 'https://s3-us-west-1.amazonaws.com/fallout76maptiles/emptyTile.png',
                 noWrap: true,
@@ -129,7 +130,7 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
             type: 'xyz'
         },newMap: {
             name: 'Fallout76 New',
-            url: 'http://d1sv6jqpfm1rn8.cloudfront.net/{z}/{x}/{y}.png',
+            url: 'http://d1rl5aw7fz8q45.cloudfront.net/{z}/{x}/{y}.png',
             layerParams:{
                 errorTileUrl: 'https://s3-us-west-1.amazonaws.com/fallout76maptiles/emptyTile.png',
                 noWrap: true,
