@@ -135,7 +135,8 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
 
     $scope.categories = mapDataService.categories;
     $scope.getMarkerUrl = function(marker){
-        return settings.markerUrl + marker.IconUrl;
+        var url = marker ? marker.IconUrl : "";
+        return settings.markerUrl + url;
     };
 
     $scope.setGroupStates = function(group){
