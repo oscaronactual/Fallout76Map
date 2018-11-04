@@ -8,6 +8,7 @@ falloutApp.controller('categoriesController', ['$uibModalInstance', 'mapDataServ
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
             templateUrl: 'newCategory.html',
+            backdrop: 'static',
             controller: 'newCategoryController',
             controllerAs: '$ctrl',
             size: "md"
@@ -19,6 +20,7 @@ falloutApp.controller('categoriesController', ['$uibModalInstance', 'mapDataServ
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
             templateUrl: 'updateCategory.html',
+            backdrop: 'static',
             controller: 'updateCategoryController',
             controllerAs: '$ctrl',
             size: "md",
@@ -36,6 +38,7 @@ falloutApp.controller('categoriesController', ['$uibModalInstance', 'mapDataServ
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
             templateUrl: 'deleteCategory.html',
+            backdrop: 'static',
             controller: 'deleteCategoryController',
             controllerAs: '$ctrl',
             size: "md",
