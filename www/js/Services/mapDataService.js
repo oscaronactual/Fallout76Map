@@ -32,6 +32,7 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
                                        addAccordionPropertiesToCategory(item);
                                        categoriesLookup[item.Id] = item;
                                        categoryList.push(item);
+                                       item.isDeselected = false;
                                    }
 
                                }else{
@@ -49,6 +50,10 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
                                    if(markersLookup[item.Id]){
                                        var marker = markersLookup[item.Id];
                                        if(marker.ModifiedDate < item.ModifiedDate){
+                                           item.iconUrl= settings.markerUrl + markersLookup[item.MarkerId].IconUrl;
+                                           item.iconSize= [25,25];
+                                           item.iconAnchor = [15,15];
+                                           item.popupAnchor = [0, -10];
                                            markersLookup[item.Id] = item;
                                        }
                                    }
@@ -107,7 +112,11 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
                                    }
                                }
                                else{
-                                   //TODO : Delete groups that are IsDeleted
+                                   categoryList.forEach(function(element){
+                                       findAndSplice(item.Id, element.Groups);
+                                   });
+                                   findAndSplice(item.Id, groupList);
+                                   delete groupsLookup[item.Id];
                                }
                            });
                            response.data.Points.forEach(function(item, index, array){
@@ -202,6 +211,7 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
         return {
             initializePoints: function(callback){
                 var pointsFound = localStorageService.get('pointsFound');
+                var groupsSelected = localStorageService.get('groupsSelected');
                 if(! pointsFound){
                     localStorageService.set('pointsFound', []);
                     pointsFound = localStorageService.get('pointsFound');
@@ -223,6 +233,7 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
                                 addAccordionPropertiesToCategory(item);
                                 categoriesLookup[item.Id] = item;
                                 categoryList.push(categoriesLookup[item.Id]);
+                                item.isDeselected = false;
                             }
                         });
                         response.data.Markers.forEach(function(item, index, array){
@@ -251,6 +262,9 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
                                 namedGroups[item.GroupName] = item;
                                 pointsGrouped.push(item);
                                 category.Groups.push(item);
+                                category.isDeselected = !category.Groups.some(function(element){
+                                    return element.visible;
+                                })
                             }
                         });
                         response.data.Points.forEach(function(item, index, array){
@@ -291,10 +305,32 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
                                 }
                             }
                         });
+
+                        if (!groupsSelected) {
+                            groupsSelected = [];
+                            groupList.forEach(function(element){
+                                if (element.visible){
+                                    groupsSelected.push(element.Id);
+                                }
+                            });
+                            localStorageService.set('groupsSelected', groupsSelected)
+                        }else{
+
+                            groupList.forEach(function(element){
+                                if (groupsSelected.includes(element.Id)){
+                                    element.visible = true;
+                                }else{
+                                    element.visible = false;
+                                }
+                            });
+                        }
+
                         callback();
                     }).then(function(response){
 
                 });
+
+
                 poll();
             },
             groupedPoints: pointsGrouped,

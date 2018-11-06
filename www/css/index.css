@@ -208,6 +208,8 @@ html, .full-height{
 }
 .groupItem{
     margin-bottom: 3px;
+    padding-left:5px !important;
+    padding-right:5px !important;
 }
 
 .groupMarker{
@@ -219,7 +221,7 @@ html, .full-height{
 .groupLabel{
     line-height: 21px;
     white-space: nowrap;
-    width: 90px;
+    width: 125px;
     overflow: hidden;
     text-overflow: ellipsis;
     float: left;
@@ -519,4 +521,7 @@ a.markerFoundLink{
 
 .btn-default.collapseButton:hover, .btn-default.collapseButton:focus {
     background-color: #000 !important;
+}
+.twelve{
+    height: 12px;
 }

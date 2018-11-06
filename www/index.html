@@ -14,6 +14,8 @@
         <link rel="stylesheet" href="css/pure-drawer.css"><!--
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/regular.css" integrity="sha384-z3ccjLyn+akM2DtvRQCXJwvT5bGZsspS4uptQKNXNg778nyzvdMqiGcqHVGiAUyY" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/fontawesome.css" integrity="sha384-u5J7JghGz0qUrmEsWzBQkfvc8nK3fUT7DCaQzNQ+q4oEXhGSx+P2OqjWsfIRB8QT" crossorigin="anonymous">
         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         <script src="//code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
         <script src="//cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
@@ -57,15 +59,19 @@
                                     <i class="pull-right glyphicon" ng-class="{'glyphicon-chevron-down': category.isOpen, 'glyphicon-chevron-right': !category.isOpen}"></i>
                                 </div>
                             </uib-accordion-heading>
-                            <div class="container groupContainer">
+                            <div class="groupContainer">
                                 <div class="row">
-                                    <form>
-                                        <div ng-repeat="group in category.Groups | orderBy:'GroupName'" class="col-md-6 groupItem" ng-click="setGroupStates(group)">
-                                            <img class="groupMarker" ng-class="{'group-disabled': !group.visible}" ng-src="{{getMarkerUrl(group.Marker)}}" />
-                                            <div class="groupLabel" ng-class="{'group-disabled': !group.visible}">{{group.GroupName}}</div>
-                                            <div class="pill" ng-class="{'group-disabled': !group.visible}">{{group.Points.length}}</div>
-                                        </div>
-                                    </form>
+                                    <div class="col-1 col-md-offset-8"><div class="btn btn-link" ng-model="category.isDeselected" ng-click="selectToggleAll(category)"><span class="far" ng-class="{'fa-eye': !category.isDeselected, 'fa-eye-slash': category.isDeselected}" >{{category.isDeselected?'Select All' : 'Deselect All'}}</span></div></div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-12 twelve"></div>
+                                </div>
+                                <div class="row">
+                                    <div ng-repeat="group in category.Groups | orderBy:'GroupName'" class="col-xs-6 no-gutters groupItem" ng-click="setGroupStates(group)">
+                                        <img class="groupMarker" ng-class="{'group-disabled': !group.visible}" ng-src="{{getMarkerUrl(group.Marker)}}" />
+                                        <div class="groupLabel" ng-class="{'group-disabled': !group.visible}">{{group.GroupName}}</div>
+                                        <div class="pill" ng-class="{'group-disabled': !group.visible}">{{group.Points.length}}</div>
+                                    </div>
                                 </div>
                             </div>
                         </div>

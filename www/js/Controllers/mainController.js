@@ -1,5 +1,6 @@
-falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leafletMapEvents', 'mapDataService', 'leafletData','$log', 'settings', function($scope, leafletBoundsHelpers,leafletMapEvents, mapDataService, leafletData, $log, settings) {
+falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leafletMapEvents', 'mapDataService', 'leafletData','$log', 'settings','localStorageService', function($scope, leafletBoundsHelpers,leafletMapEvents, mapDataService, leafletData, $log, settings,localStorageService) {
     $scope.initialize = function(){
+
 
         mapDataService.initializePoints(initializePointLayer);
         $scope.pointGroups = mapDataService.groupedPoints;
@@ -93,6 +94,7 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
          function initializePointLayer(){
              $scope.layers.overlays = mapDataService.namedGroups;
              $scope.markers = mapDataService.pointsLookup;
+             localStorageService.bind($scope, 'groupsSelected');
          }
     };
     $scope.initialize();
@@ -142,7 +144,45 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
     $scope.setGroupStates = function(group){
         group.visible = !group.visible;
         this.layers.overlays[group.GroupName].visible = group.visible;
+
+        recordGroupSelectionStatus(group);
+    };
+
+    function recordGroupSelectionStatus(group){
+        if(group.visible){
+            //var selectedGroups = localStorageService.get('selectedGroups');
+            if (!$scope.groupsSelected.includes(group.Id)){
+                $scope.groupsSelected.push(group.Id);
+                /*localStorageService.set('selectedGroups',selectedGroups);*/
+            }
+        }else{
+            if($scope.groupsSelected.includes(group.Id)){
+                var index = $scope.groupsSelected.findIndex(function(element){
+                    return element === group.Id;
+                });
+                $scope.groupsSelected.splice(index, 1);
+            }
+        }
     }
 
+    $scope.selectToggleAll = function(category){
+        var someGroupsAreSelected = category.Groups.some(function (element) {
+            return element.visible;
+        });
+
+        if (someGroupsAreSelected){
+            category.Groups.forEach(function(element){
+                element.visible = false;
+                category.isDeselected = true;
+                recordGroupSelectionStatus(element);
+            })
+        } else{
+            category.Groups.forEach(function(element){
+                element.visible = true;
+                category.isDeselected = false;
+                recordGroupSelectionStatus(element);
+            })
+        }
+    };
 
 }]);
