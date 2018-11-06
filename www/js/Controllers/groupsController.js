@@ -17,6 +17,7 @@ falloutApp.controller('groupsController', ['$uibModalInstance', 'mapDataService'
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
             templateUrl: 'newGroup.html',
+            backdrop: 'static',
             controller: 'newGroupController',
             controllerAs: '$ctrl',
             size: "md"
@@ -28,6 +29,7 @@ falloutApp.controller('groupsController', ['$uibModalInstance', 'mapDataService'
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
             templateUrl: 'updateGroup.html',
+            backdrop: 'static',
             controller: 'updateGroupController',
             controllerAs: '$ctrl',
             size: "md",
@@ -39,18 +41,19 @@ falloutApp.controller('groupsController', ['$uibModalInstance', 'mapDataService'
         });
     };
 
-    $ctrl.deleteGroup = function(category){
+    $ctrl.deleteGroup = function(group){
         var modalInstance = $uibModal.open({
             animation: true,
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
-            templateUrl: 'deleteCategory.html',
-            controller: 'deleteCategoryController',
+            templateUrl: 'deleteGroup.html',
+            backdrop: 'static',
+            controller: 'deleteGroupController',
             controllerAs: '$ctrl',
             size: "md",
             resolve: {
-                categoryToDelete: function () {
-                    return category;
+                groupToDelete: function () {
+                    return group;
                 }
             }
         });
@@ -124,14 +127,12 @@ falloutApp.controller('updateGroupController', ['$uibModalInstance', 'mapDataSer
     };
 }]);
 
-falloutApp.controller('DeleteGroupController', ['$uibModalInstance', 'mapDataService', function($uibModalInstance, mapDataService) {
+falloutApp.controller('deleteGroupController', ['$uibModalInstance', 'mapDataService', 'groupToDelete', function($uibModalInstance, mapDataService, groupToDelete) {
     var $ctrl = this;
-    $ctrl.groupName = "";
-    $ctrl.category = {};
-    $ctrl.groupMarker = {};
+    $ctrl.groupName = groupToDelete.GroupName;
 
     $ctrl.ok = function () {
-        mapDataService.addCategory($ctrl.categoryName);
+        mapDataService.deleteGroup(groupToDelete);
         $uibModalInstance.close({
         });
     };

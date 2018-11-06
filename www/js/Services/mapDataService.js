@@ -118,7 +118,7 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                         item.groups = [];
                         categoriesLookup[item.Id] = item;
                         categoryList.push(item);
-
+                        item.isDeselected = false;
                     }
                 }).then(function(response){
 
@@ -177,7 +177,15 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                })
                .then(function(response){});
        }
-       function deleteGroup(){}
+       function deleteGroup(groupToDelete){
+            $http.delete(settings.apiUrl + settings.groupsEndpoint + groupToDelete.Id)
+                .then(function(){
+
+                })
+                .then(function(){
+
+                })
+       }
        function updateGroup(groupToUpdate){
             $http.put(settings.apiUrl + settings.groupsEndpoint + groupToUpdate.Id, groupToUpdate)
                 .then(function(response){
@@ -287,6 +295,7 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                        addAccordionPropertiesToCategory(item);
                                        categoriesLookup[item.Id] = item;
                                        categoryList.push(item);
+                                       item.isDeselected = false;
                                    }
 
                                }else{
@@ -409,7 +418,7 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                        item.lng = item.LongCoord;
                                        item.draggable = true;
                                        item.layer = groupsLookup[item.GroupId].GroupName;
-                                       testPoint.popupOptions = {
+                                       item.popupOptions = {
                                            minWidth:200,
                                            className: "falloutMarkerPopup",
                                            permanent: item.AlwaysShowTooltip
@@ -453,6 +462,7 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
        function addAccordionPropertiesToCategory(category){
            category.isOpen = false;
            category.isHovered = false;
+           category.isDeselected = false;
            category.Groups = [];
        }
 
@@ -469,6 +479,7 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                 addAccordionPropertiesToCategory(item);
                                 categoriesLookup[item.Id] = item;
                                 categoryList.push(categoriesLookup[item.Id]);
+                                item.isDeselected = false;
                             }
                         });
                         response.data.Markers.forEach(function(item, index, array){
@@ -497,6 +508,9 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                 namedGroups[item.GroupName] = item;
                                 pointsGrouped.push(item);
                                 category.Groups.push(item);
+                                category.isDeselected = !category.Groups.some(function(element){
+                                    return element.visible;
+                                })
                             }
                         });
                         response.data.Points.forEach(function(item, index, array){
@@ -537,6 +551,7 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
             groupList: groupList,
             addPoint: addPoint,
             updatePoint: updatePoint,
+            deletePoint: deletePoint,
             categories: categoryList,
             addCategory: addCategory,
             updateCategory: updateCategory,
@@ -547,6 +562,7 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
             deleteMarker: deleteMarker,
             addGroup:addGroup,
             updateGroup:updateGroup,
+            deleteGroup:deleteGroup,
             markersLookup:markersLookup,
             categoriesLookup:categoriesLookup
        }

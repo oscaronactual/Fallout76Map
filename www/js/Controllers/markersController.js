@@ -12,6 +12,7 @@ falloutApp.controller('markersController', ['$uibModalInstance', 'mapDataService
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
             templateUrl: 'newMarker.html',
+            backdrop: 'static',
             controller: 'newMarkerController',
             controllerAs: '$ctrl',
             size: "md"
@@ -23,6 +24,7 @@ falloutApp.controller('markersController', ['$uibModalInstance', 'mapDataService
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
             templateUrl: 'updateMarker.html',
+            backdrop: 'static',
             controller: 'updateMarkerController',
             controllerAs: '$ctrl',
             size: "md",
@@ -40,6 +42,7 @@ falloutApp.controller('markersController', ['$uibModalInstance', 'mapDataService
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
             templateUrl: 'deleteMarker.html',
+            backdrop: 'static',
             controller: 'deleteMarkerController',
             controllerAs: '$ctrl',
             size: "md",

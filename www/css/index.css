@@ -208,6 +208,8 @@ img.leaflet-marker-icon {
 }
 .groupItem{
     margin-bottom: 3px;
+    padding-left:5px !important;
+    padding-right:5px !important;
 }
 
 .groupMarker{
@@ -219,7 +221,7 @@ img.leaflet-marker-icon {
 .groupLabel{
     line-height: 21px;
     white-space: nowrap;
-    width: 90px;
+    width: 125px;
     overflow: hidden;
     text-overflow: ellipsis;
     float: left;
@@ -376,4 +378,7 @@ div.wrapper{
 .editLabel{
     float:right;
     margin-right: 10px;
+}
+.twelve{
+    height: 12px;
 }

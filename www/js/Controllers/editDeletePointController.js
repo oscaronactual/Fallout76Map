@@ -31,7 +31,7 @@ falloutApp.controller('editDeletePointController', ['$uibModalInstance', 'points
     };
 
     $ctrl.delete = function () {
-        mapDataService.deletePoint(editPointDefinition);
+        mapDataService.deletePoint(pointspec);
         $uibModalInstance.close();
     };
 

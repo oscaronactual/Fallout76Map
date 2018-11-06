@@ -14,6 +14,7 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
             templateUrl: 'newPoint.html',
+            backdrop: 'static',
             controller: 'newPointController',
             controllerAs: '$ctrl',
             size: "md",
@@ -39,6 +40,7 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
             templateUrl: 'editDeletePoint.html',
+            backdrop: 'static',
             controller: 'editDeletePointController',
             controllerAs: '$ctrl',
             size: "md",
@@ -78,6 +80,7 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
             templateUrl: 'showCategories.html',
+            backdrop: 'static',
             controller: 'categoriesController',
             controllerAs: '$ctrl',
             size: "md"
@@ -90,6 +93,7 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
             templateUrl: 'showMarkers.html',
+            backdrop: 'static',
             controller: 'markersController',
             controllerAs: '$ctrl',
             size: "md"
@@ -102,10 +106,31 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
             ariaLabelledBy: 'modal-title',
             ariaDescribedBy: 'modal-body',
             templateUrl: 'showGroups.html',
+            backdrop: 'static',
             controller: 'groupsController',
             controllerAs: '$ctrl',
             size: "md"
         });
+    };
+
+
+
+    $scope.selectToggleAll = function(category){
+        var someGroupsAreSelected = category.Groups.some(function (element) {
+            return element.visible;
+        });
+
+        if (someGroupsAreSelected){
+            category.Groups.forEach(function(element){
+                element.visible = false;
+                category.isDeselected = true;
+            })
+        } else{
+            category.Groups.forEach(function(element){
+                element.visible = true;
+                category.isDeselected = false;
+            })
+        }
     };
 
 
@@ -219,6 +244,7 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
                 ariaLabelledBy: 'modal-title',
                 ariaDescribedBy: 'modal-body',
                 templateUrl: 'movePoint.html',
+                backdrop: 'static',
                 controller: 'movePointController',
                 controllerAs: '$ctrl',
                 size: "md",
