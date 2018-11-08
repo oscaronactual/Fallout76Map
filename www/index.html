@@ -15,6 +15,7 @@
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
         <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">-->
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/regular.css" integrity="sha384-z3ccjLyn+akM2DtvRQCXJwvT5bGZsspS4uptQKNXNg778nyzvdMqiGcqHVGiAUyY" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/solid.css" integrity="sha384-rdyFrfAIC05c5ph7BKz3l5NG5yEottvO/DQ0dCrwD8gzeQDjYBHNr1ucUpQuljos" crossorigin="anonymous">
         <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/fontawesome.css" integrity="sha384-u5J7JghGz0qUrmEsWzBQkfvc8nK3fUT7DCaQzNQ+q4oEXhGSx+P2OqjWsfIRB8QT" crossorigin="anonymous">
         <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
         <script src="//code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -52,6 +53,11 @@
                     </div>
                 </div>
                 <div class="accordionContainer">
+                    <!--<div class="buttonBar btn-group ">-->
+                        <label class="btn btn-primary pull-left" ng-click="toggleInverse()"><span class="fas fa-not-equal">Invert</span></label>
+                        <label class="btn btn-primary pull-right" ng-model="isAllDeselected" ng-click="toggleAll()"><span class="far" ng-class="{'fa-eye': !isAllDeselected, 'fa-eye-slash': isAllDeselected}" >{{isAllDeselected?'Select All' : 'Deselect All'}}</span></label>
+                    <!--</div>-->
+                    <div style="clear:both;"></div>
                     <uib-accordion close-others="true">
                         <div uib-accordion-group class="panel-default" ng-repeat="category in categories" is-open="category.isOpen">
                             <uib-accordion-heading ng-click="category.isOpen=!category.isOpen">

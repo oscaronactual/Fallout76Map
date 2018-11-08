@@ -19,7 +19,11 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
             }
         };
 
+        localStorageService.bind($scope, 'selectedLayer');
 
+        if ($scope.selectedLayer === null || $scope.selectedLayer === ''){
+            $scope.selectedLayer = 'gameMap';
+        }
 
         $scope.definedLayers = {
             gameMap: {
@@ -58,7 +62,7 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
             },
             layers: {
                 baselayers: {
-                    currentLayer:$scope.definedLayers["gameMap"]
+                    currentLayer:$scope.definedLayers[$scope.selectedLayer]
                     /*gameMap: {
                         name: 'Fallout76 MapTiles',
                         url: 'http://d2upr4z2n1fxid.cloudfront.net/{z}/{x}/{y}.png',
@@ -95,17 +99,20 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
              $scope.layers.overlays = mapDataService.namedGroups;
              $scope.markers = mapDataService.pointsLookup;
              localStorageService.bind($scope, 'groupsSelected');
+             $scope.isAllDeselected = $scope.groupsSelected === [];
          }
     };
     $scope.initialize();
 
-    $scope.gameMapIsCurrent = true;
+    $scope.gameMapIsCurrent = $scope.selectedLayer === "gameMap";
     $scope.changeCallback = function(){
         if ($scope.gameMapIsCurrent){
             $scope.setLayerCurrent("gameMap");
+            $scope.selectedLayer = "gameMap";
             $scope.gameMapIsCurrent = true;
         } else{
             $scope.setLayerCurrent("vector");
+            $scope.selectedLayer = "vector";
             $scope.gameMapIsCurrent = false;
         }
     };
@@ -173,16 +180,48 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
         if (someGroupsAreSelected){
             category.Groups.forEach(function(element){
                 element.visible = false;
-                category.isDeselected = true;
                 recordGroupSelectionStatus(element);
-            })
+            });
+            category.isDeselected = true;
         } else{
             category.Groups.forEach(function(element){
                 element.visible = true;
-                category.isDeselected = false;
                 recordGroupSelectionStatus(element);
-            })
+            });
+            category.isDeselected = false;
         }
     };
+
+    $scope.toggleInverse = function(){
+        $scope.categories.forEach(function(category){
+            category.Groups.forEach(function(group){
+                group.visible = !group.visible;
+                recordGroupSelectionStatus(group);
+            })
+        });
+    };
+
+    $scope.toggleAll = function(){
+        if($scope.isAllDeselected){
+            $scope.categories.forEach(function(category){
+                category.Groups.forEach(function(element){
+                    element.visible = true;
+                    recordGroupSelectionStatus(element);
+                });
+                category.isDeselected = false;
+            });
+            $scope.isAllDeselected = false;
+        }else{
+            $scope.categories.forEach(function(category){
+                category.Groups.forEach(function(element){
+                    element.visible = false;
+                    recordGroupSelectionStatus(element);
+                });
+                category.isDeselected = true;
+            });
+            $scope.isAllDeselected = true;
+        }
+
+    }
 
 }]);
