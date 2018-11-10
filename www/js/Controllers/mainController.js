@@ -1,8 +1,7 @@
-falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leafletMapEvents', 'mapDataService', 'leafletData','$log', 'settings','localStorageService', function($scope, leafletBoundsHelpers,leafletMapEvents, mapDataService, leafletData, $log, settings,localStorageService) {
+falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leafletMapEvents', 'mapDataService', 'leafletData','$log', 'settings','localStorageService', '$stateParams', function($scope, leafletBoundsHelpers,leafletMapEvents, mapDataService, leafletData, $log, settings,localStorageService, $stateParams) {
     $scope.initialize = function(){
 
 
-        mapDataService.initializePoints(initializePointLayer);
         $scope.pointGroups = mapDataService.groupedPoints;
         //$scope.markers =  mapDataService.points;
         $scope.markerLayers = {};
@@ -54,7 +53,6 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
             $scope.currentLong = args.leafletEvent.latlng.lng;
         });
         angular.extend($scope, {
-            /*bounds: maxbounds,*/
             center: {
                 lat: 70,
                 lng: -90,
@@ -63,27 +61,6 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
             layers: {
                 baselayers: {
                     currentLayer:$scope.definedLayers[$scope.selectedLayer]
-                    /*gameMap: {
-                        name: 'Fallout76 MapTiles',
-                        url: 'http://d2upr4z2n1fxid.cloudfront.net/{z}/{x}/{y}.png',
-                        layerParams:{
-                            errorTileUrl: 'https://s3-us-west-1.amazonaws.com/fallout76maptiles/emptyTile.png',
-                            noWrap: true,
-                            maxZoom:8,
-                            minZoom:3
-                        },
-                        type: 'xyz'
-                    },vector: {
-                        name: 'Fallout76 Topo',
-                        url: 'http://dfxypv9w3yb1b.cloudfront.net/{z}/{x}/{y}.png',
-                        layerParams:{
-                            errorTileUrl: 'https://s3-us-west-1.amazonaws.com/fallout76maptiles/emptyTile.png',
-                            noWrap: true,
-                            maxZoom:8,
-                            minZoom:3
-                        },
-                        type: 'xyz'
-                    }*/
                 },
                 overlays: $scope.markerLayers
             },
@@ -95,11 +72,25 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
             }
         });
 
+        mapDataService.initializePoints(initializePointLayer);
          function initializePointLayer(){
              $scope.layers.overlays = mapDataService.namedGroups;
              $scope.markers = mapDataService.pointsLookup;
              localStorageService.bind($scope, 'groupsSelected');
              $scope.isAllDeselected = $scope.groupsSelected === [];
+             if ($stateParams.pointId !== null && $stateParams.pointId > 0){
+                var findPoint = mapDataService.pointsLookup[$stateParams.pointId];
+
+                mapDataService.points.forEach(function(element){
+                    element.focus = false;
+                });
+
+                if (findPoint){
+                    $scope.center.lat = findPoint.lat;
+                    $scope.center.lng = findPoint.lng;
+                    findPoint.focus = true;
+                }
+             }
          }
     };
     $scope.initialize();
@@ -142,7 +133,9 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
         });
     });
 
-    $scope.categories = mapDataService.categories;
+    if (!$scope.categories){
+        $scope.categories = mapDataService.categories;
+    }
     $scope.getMarkerUrl = function(marker){
         var url = marker ? marker.IconUrl : "";
         return settings.markerUrl + url;

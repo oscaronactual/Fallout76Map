@@ -192,15 +192,16 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
                }, 30000);
        }
         function getMessageTemplate(){
-            return "    <div class='markerPopup' ng-controller='mapPointController'>\n" +
-                   "      <div class='markerPopupHeader'>\n" +
-                   "        <span class='markerTitle'>{{point.PointName}}</span>\n" +
-                   "      </div>\n" +
-                   "      <div class='markerData'>\n" +
-                   "        <span class='markerDescription'>{{point.Description}}</span><br />\n" +
-                   "        <a class='markerWikiLink' ng-show='point.Link' ng-href=\"{{point.Link}}\">Wiki:{{point.PointName}}</a><br />\n" +
-                   "        <a class='markerFoundLink' href='#' ng-click='toggleFound()' \">Mark as found</a>\n" +
-                   "    </div>";
+            return  "    <div class='markerPopup' ng-controller='mapPointController'>\n" +
+                    "      <div class='markerPopupHeader'>\n" +
+                    "        <span class='markerTitle'>{{point.PointName}}</span>\n" +
+                    "      </div>\n" +
+                    "      <div class='markerData'>\n" +
+                    "        <span class='markerDescription'>{{point.Description}}</span><br />\n" +
+                    "        <a class='markerWikiLink' ng-show='point.Link' ng-href=\"{{point.Link}}\">Wiki:{{point.PointName}}</a><br />\n" +
+                    "        <a class='markerFoundLink' href='#' ng-click='toggleFound()' \">Mark as found</a>\n" +
+                    "        <a class='markerDirectLink' href='#' ngclipboard data-clipboard-text='https://www.falloutmaps.com/#!/{{point.Id}}'><span class='fas fa-link'></span></a>\n" +
+                    "    </div>";
         }
 
        function addAccordionPropertiesToCategory(category){
@@ -208,8 +209,15 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
            category.isHovered = false;
            category.Groups = [];
        }
+
+       var isInitialized = false;
+
         return {
             initializePoints: function(callback){
+                if(isInitialized){
+                    callback();
+                    return;
+                }
                 var pointsFound = localStorageService.get('pointsFound');
                 var groupsSelected = localStorageService.get('groupsSelected');
                 if(! pointsFound){
@@ -329,7 +337,7 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
                     }).then(function(response){
 
                 });
-
+                isInitialized = true;
 
                 poll();
             },

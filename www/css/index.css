@@ -344,8 +344,8 @@ div.falloutMarkerPopup div.leaflet-popup-content-wrapper div.leaflet-popup-conte
     border-radius: 3px;
     font-size: 12pt;
 }
-.markerPopup a.markerWikiLink:link:before {
-    content: "Link: "; }
+/*.markerPopup a.markerWikiLink:link:before {
+    content: "Link: "; }*/
 
 .markerPopup a:link,.markerPopup a:visited{
     font-family: "Roboto Condensed", Impact;
@@ -396,8 +396,12 @@ div.wrapper{
     text-align: center;
 }
 
-a.markerFoundLink{
+a.markerFoundLink, a.markerDirectLink{
     color: #AAA !important;
+}
+
+a.markerDirectLink{
+    float:right;
 }
 
 .regionTooltip{
@@ -524,4 +528,10 @@ a.markerFoundLink{
 }
 .twelve{
     height: 12px;
+}
+
+.mapElement{
+    position: absolute;
+    top: 0;
+    left: 0;
 }
