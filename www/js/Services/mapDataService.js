@@ -198,7 +198,7 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
                     "      </div>\n" +
                     "      <div class='markerData'>\n" +
                     "        <span class='markerDescription'>{{point.Description}}</span><br />\n" +
-                    "        <a class='markerWikiLink' ng-show='point.Link' ng-href=\"{{point.Link}}\">Wiki:{{point.PointName}}</a><br />\n" +
+                    "        <a class='markerWikiLink' ng-show='point.Link' rel='noopener noreferrer' target='_blank' ng-href=\"{{point.Link}}\">Wiki:{{point.PointName}}</a><br />\n" +
                     "        <a class='markerFoundLink' href='#' ng-click='toggleFound()' \">Mark as found</a>\n" +
                     "        <a class='markerDirectLink' href='#' ngclipboard data-clipboard-text='https://www.falloutmaps.com/#!/{{point.Id}}'><span class='fas fa-link'></span></a>\n" +
                     "    </div>";
