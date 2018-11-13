@@ -382,3 +382,7 @@ div.wrapper{
 .twelve{
     height: 12px;
 }
+.modal-body{
+    max-height: calc(100vh - 400px);
+    overflow: auto;
+}

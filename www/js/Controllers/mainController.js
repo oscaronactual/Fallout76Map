@@ -109,7 +109,7 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
             backdrop: 'static',
             controller: 'groupsController',
             controllerAs: '$ctrl',
-            size: "md"
+            size: "lg"
         });
     };
 
