@@ -386,3 +386,9 @@ div.wrapper{
     max-height: calc(100vh - 400px);
     overflow: auto;
 }
+#Coords{
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    z-index: 1001;
+}
