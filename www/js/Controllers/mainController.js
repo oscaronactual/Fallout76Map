@@ -252,8 +252,10 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
         mapDataService.initializePoints(initializePointLayer);
 
         $scope.$on("leafletDirectiveMap.mousemove", function(e, args){
-            $scope.currentLat = Math.round(args.leafletEvent.latlng.lat * 100) / 100;
-            $scope.currentLong = Math.round(args.leafletEvent.latlng.lng * 100) / 100;
+            $scope.currentLat = Math.round(args.leafletEvent.latlng.lat);
+            $scope.currentLong = Math.round(args.leafletEvent.latlng.lng);
+            $scope.currentGridX = Math.floor(args.leafletEvent.latlng.lng/4152);
+            $scope.currentGridY = Math.floor(args.leafletEvent.latlng.lat/4072);
         });
 
         $scope.$on("leafletDirectiveMap.click", function(e, args){

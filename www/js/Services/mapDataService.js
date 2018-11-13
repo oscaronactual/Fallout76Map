@@ -539,7 +539,7 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                 item.Marker = markersLookup[item.MarkerId];
                             }
                         });
-                        var originPoint = {
+                       /* var originPoint = {
                             AlwaysShowTooltip: false,
                             Description: "Origin",
                             GroupId: 30,
@@ -565,7 +565,7 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                         };
                         pointLookup[0] = originPoint;
                         groupsLookup[1].Points.push(originPoint);
-                        pointsUngrouped.push(originPoint);
+                        pointsUngrouped.push(originPoint);*/
 
                         callback();
                     }).then(function(response){
