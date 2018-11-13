@@ -1,4 +1,40 @@
 falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leafletMapEvents', 'mapDataService', 'leafletData','$log', 'settings','localStorageService', '$stateParams', function($scope, leafletBoundsHelpers,leafletMapEvents, mapDataService, leafletData, $log, settings,localStorageService, $stateParams) {
+
+    var factorx = 0.000218;
+    var factory = 0.0002225;
+
+    L.CRS.falloutProjection = L.extend({}, L.CRS.Simple, {
+        projection: L.Projection.LonLat,
+        transformation: new L.Transformation(factorx, 63.525, -factory, 64.02),
+        // Changing the transformation is the key part, everything else is the same.
+        // By specifying a factor, you specify what distance in meters one pixel occupies (as it still is CRS.Simple in all other regards).
+        // In this case, I have a tile layer with 256px pieces, so Leaflet thinks it's only 256 meters wide.
+        // I know the map is supposed to be 2048x2048 meters, so I specify a factor of 0.125 to multiply in both directions.
+        // In the actual project, I compute all that from the gdal2tiles tilemapresources.xml,
+        // which gives the necessary information about tilesizes, total bounds and units-per-pixel at different levels.
+
+
+// Scale, zoom and distance are entirely unchanged from CRS.Simple
+        scale: function(zoom) {
+            return Math.pow(2, zoom);
+        },
+
+        zoom: function(scale) {
+            return Math.log(scale) / Math.LN2;
+        },
+
+        distance: function(latlng1, latlng2) {
+            var dx = latlng2.lng - latlng1.lng,
+                dy = latlng2.lat - latlng1.lat;
+
+            return Math.sqrt(dx * dx + dy * dy);
+        },
+        infinite: true
+    });
+
+
+
+
     $scope.initialize = function(){
 
 
@@ -68,7 +104,8 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
             maxbounds: maxbounds,
             defaults:{
                 attributionControl: false,
-                zoomControlPosition: 'bottomright'
+                zoomControlPosition: 'bottomright',
+                crs:"falloutProjection"
             }
         });
 
@@ -107,6 +144,13 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
             $scope.gameMapIsCurrent = false;
         }
     };
+
+    $scope.$on("leafletDirectiveMap.mousemove", function(e, args){
+        $scope.currentLat = Math.round(args.leafletEvent.latlng.lat);
+        $scope.currentLong = Math.round(args.leafletEvent.latlng.lng);
+        $scope.currentGridX = Math.floor(args.leafletEvent.latlng.lng/4152);
+        $scope.currentGridY = Math.floor(args.leafletEvent.latlng.lat/4072);
+    });
 
     $scope.setLayerCurrent = function(layerName) {
 
