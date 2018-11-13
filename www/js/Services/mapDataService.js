@@ -441,6 +441,8 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                    });
                                    pointsUngrouped.splice(deletePointIndex,1);
                                }
+
+
                            });
                        }).then(function(response){
 
@@ -537,6 +539,34 @@ falloutApp.factory('mapDataService', ['$http','$timeout',"settings",
                                 item.Marker = markersLookup[item.MarkerId];
                             }
                         });
+                       /* var originPoint = {
+                            AlwaysShowTooltip: false,
+                            Description: "Origin",
+                            GroupId: 30,
+                            layer: groupsLookup[1].GroupName,
+                            draggable: false,
+                            Id: 0,
+                            IsDeleted: false,
+                            LatCoord: 0,
+                            Link: "http://fallout76wiki.com/Vault_76",
+                            LongCoord: 0,
+                            MarkerId: 8,
+                            Point: null,
+                            PointName: "Origin",
+                            lat:0,
+                            lng:0,
+                            title:'Origin',
+                            icon: {
+                                iconUrl: settings.markerUrl + markersLookup[1].IconUrl,
+                                iconSize: [25,25],
+                                iconAnchor: [15,15],
+                                popupAnchor: [0, -10]
+                            }
+                        };
+                        pointLookup[0] = originPoint;
+                        groupsLookup[1].Points.push(originPoint);
+                        pointsUngrouped.push(originPoint);*/
+
                         callback();
                     }).then(function(response){
 

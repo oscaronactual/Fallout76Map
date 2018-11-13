@@ -1,5 +1,5 @@
 falloutApp.constant("settings", {
-    apiUrl: "https://falloutmaps.azurewebsites.net",//apiUrl: "http://localhost:50503",//
+    apiUrl: "http://localhost:50503",//apiUrl: "https://falloutmaps.azurewebsites.net",//
     markerUrl: "http://www.falloutmaps.com/markers/",
     updateEndpoint: "/api/update/",
     mapPointsEndpoint: "/api/falloutPoints/",

@@ -382,3 +382,9 @@ div.wrapper{
 .twelve{
     height: 12px;
 }
+#Coords{
+    position: absolute;
+    bottom: 40px;
+    left: 40px;
+    z-index: 1001;
+}
