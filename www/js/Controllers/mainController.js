@@ -236,10 +236,10 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
             }
         });
 
-        //[,]
+/*        //[,]
         var southWest = map.unproject([-192159, -180824], map.getMaxZoom());
         var northEast = map.unproject([230126,205888], map.getMaxZoom());
-        map.setMaxBounds(new L.LatLngBounds(southWest,northEast));
+        map.setMaxBounds(new L.LatLngBounds(southWest,northEast));*/
     });
 
     $scope.initialize = function(){
@@ -259,13 +259,8 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
         });
 
         $scope.$on("leafletDirectiveMap.click", function(e, args){
-            if(args.leafletEvent.latlng.lat > maxbounds.southWest.lat &&
-                args.leafletEvent.latlng.lat < maxbounds.northEast.lat &&
-                args.leafletEvent.latlng.lng > maxbounds.southWest.lng &&
-                args.leafletEvent.latlng.lng < maxbounds.northEast.lng ){
-                $scope.newPointPosition = args.leafletEvent.latlng;
-                $scope.newPoint();
-            }
+            $scope.newPointPosition = args.leafletEvent.latlng;
+            $scope.newPoint();
         });
 
         $scope.$on("leafletDirectiveMarker.click", function(e, args){
