@@ -42,17 +42,7 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
         //$scope.markers =  mapDataService.points;
         $scope.markerLayers = {};
         $scope.markers = {};
-        var mapExtent = [0.00000000, -4356.00000000, 4356.00000000, 0.00000000];
-        var maxbounds = {
-            northEast:{
-                lat:175,
-                lng:90
-            },
-            southWest:{
-                lat: -100,
-                lng: -250
-            }
-        };
+
 
         localStorageService.bind($scope, 'selectedLayer');
 
@@ -101,7 +91,6 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
                 overlays: $scope.markerLayers
             },
             markers: $scope.markers,
-            maxbounds: maxbounds,
             defaults:{
                 attributionControl: false,
                 zoomControlPosition: 'bottomright',
