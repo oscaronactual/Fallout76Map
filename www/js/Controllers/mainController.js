@@ -1,11 +1,11 @@
 falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leafletMapEvents', 'mapDataService', 'leafletData','$log', 'settings','localStorageService', '$stateParams', function($scope, leafletBoundsHelpers,leafletMapEvents, mapDataService, leafletData, $log, settings,localStorageService, $stateParams) {
 
-    var factorx = 0.000218;
-    var factory = 0.0002225;
+    var factorx = 0.00022;
+    var factory = 0.00022;
 
     L.CRS.falloutProjection = L.extend({}, L.CRS.Simple, {
         projection: L.Projection.LonLat,
-        transformation: new L.Transformation(factorx, 64.525, -factory, 64.02),
+        transformation: new L.Transformation(factorx, 64.175, -factory, 64.22),
         // Changing the transformation is the key part, everything else is the same.
         // By specifying a factor, you specify what distance in meters one pixel occupies (as it still is CRS.Simple in all other regards).
         // In this case, I have a tile layer with 256px pieces, so Leaflet thinks it's only 256 meters wide.
