@@ -32,7 +32,8 @@
                             </div>
                             <div class="row">
                                 <div ng-repeat="group in category.Groups | orderBy:'GroupName'" class="col-xs-6 no-gutters groupItem" ng-click="setGroupStates(group)">
-                                    <img class="groupMarker" ng-class="{'group-disabled': !group.visible}" ng-src="{{getMarkerUrl(group.Marker)}}" />
+                                    <i class="groupMarker"  ng-class="[getGroupIcon(group), {'group-disabled': !group.visible}]"></i>
+                                    <!--<img class="groupMarker" ng-class="{'group-disabled': !group.visible}" ng-src="{{getMarkerUrl(group.Marker)}}" />-->
                                     <div class="groupLabel" ng-class="{'group-disabled': !group.visible}">{{group.GroupName}}</div>
                                     <div class="pill" ng-class="{'group-disabled': !group.visible}">{{group.Points.length}}</div>
                                 </div>

@@ -250,4 +250,7 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
 
     }
 
+    $scope.getGroupIcon = function(group){
+        return "icon-" + group.Marker.IconUrl.replace(".png", "");
+    }
 }]);

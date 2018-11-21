@@ -535,3 +535,7 @@ a.markerDirectLink{
     top: 0;
     left: 0;
 }
+
+.fontMarker{
+    font-size: 16pt
+}

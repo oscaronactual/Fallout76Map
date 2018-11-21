@@ -135,10 +135,13 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
                                        testPoint.lng = item.LongCoord;
                                        testPoint.draggable = false;
                                        testPoint.icon = {
-                                           iconUrl: settings.markerUrl + markersLookup[item.MarkerId].IconUrl,
+                                           //iconUrl: settings.markerUrl + markersLookup[item.MarkerId].IconUrl,
+                                           html:'<i class="icon-' + markersLookup[item.MarkerId].IconUrl.replace(".png","") + '" style="color: blue"></i>',
+                                           type:'div',
                                            iconSize: [25,25],
-                                           iconAnchor: [15,15],
-                                           popupAnchor: [0, -10]
+                                           iconAnchor: [12,12],
+                                           popupAnchor: [0, -10],
+                                           className: 'fontMarker'
                                        };
 
                                    }
@@ -152,11 +155,13 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
                                        item.draggable = false;
                                        item.layer = groupsLookup[item.GroupId].GroupName;
                                        item.icon = {
-                                           iconUrl: settings.markerUrl + markersLookup[item.MarkerId].IconUrl,
+                                           //iconUrl: settings.markerUrl + markersLookup[item.MarkerId].IconUrl,
+                                           html:'<i class="icon-' + markersLookup[item.MarkerId].IconUrl.replace(".png","") + '" style="color: blue"></i>',
+                                           type:'div',
                                            iconSize: [25,25],
-                                           iconAnchor: [15,15],
+                                           iconAnchor: [12,12],
                                            popupAnchor: [0, -10],
-                                           className: 'markerShadow1 markerShadow2 markerShadow3'
+                                           className: 'fontMarker'
                                        };
                                        item.Marker = markersLookup[item.MarkerId];
                                        item.getMessageScope = function(){
@@ -300,11 +305,13 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
                                 item.draggable = false;
                                 item.layer = groupsLookup[item.GroupId].GroupName;
                                 item.icon = {
-                                    iconUrl: settings.markerUrl + markersLookup[item.MarkerId].IconUrl,
+                                    //iconUrl: settings.markerUrl + markersLookup[item.MarkerId].IconUrl,
+                                    html:'<i class="icon-' + markersLookup[item.MarkerId].IconUrl.replace(".png","") + '"></i>',
+                                    type:'div',
                                     iconSize: [25,25],
-                                    iconAnchor: [15,15],
+                                    iconAnchor: [12,12],
                                     popupAnchor: [0, -10],
-                                    className: 'markerShadow1 markerShadow2 markerShadow3'
+                                    className: 'fontMarker'
                                 };
                                 item.Marker = markersLookup[item.MarkerId];
                                 if (pointsFound.includes(item.Id)){

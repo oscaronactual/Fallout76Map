@@ -1,0 +1,1147 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('../fonts/icomoon.eot?j5r20p');
+  src:  url('../fonts/icomoon.eot?j5r20p#iefix') format('embedded-opentype'),
+    url('../fonts/icomoon.ttf?j5r20p') format('truetype'),
+    url('../fonts/icomoon.woff?j5r20p') format('woff'),
+    url('../fonts/icomoon.svg?j5r20p#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  font-size: 16pt;
+  text-shadow: 1px 1px 0px #000, -1px -1px 0px #000, -1px 1px 0px #000, 1px -1px 0px #000, 2px 2px 1px rgba(8, 26, 22, 0.6), 3px 3px 1px rgba(8, 26, 22, 0.6), 4px 4px 1px rgba(8, 26, 22, 0.6);
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-agri_research:before {
+  content: "\e900";
+}
+.icon-agri_research {
+  color: #8CB5E6;
+}  
+.icon-alch:before {
+  content: "\e901";
+}
+.icon-ammo:before {
+  content: "\e902";
+}
+.icon-android:before {
+  content: "\e903";
+}
+.icon-apparel:before {
+  content: "\e904";
+}
+.icon-apparel {
+  color: #A585F3;
+}
+.icon-arktos:before {
+  content: "\e905";
+}
+.icon-arktos {
+  color: #8CB5E6;
+}  
+.icon-arrow_down:before {
+  content: "\e906";
+}
+.icon-arrow_left:before {
+  content: "\e907";
+}
+.icon-arrow_right:before {
+  content: "\e908";
+}
+.icon-arrow_up:before {
+  content: "\e909";
+}
+.icon-artillery:before {
+  content: "\e90a";
+}
+.icon-artillery {
+  color: #8CB5E6;
+}  
+.icon-astrodome:before {
+  content: "\e90b";
+}
+.icon-astrodome {
+  color: #8CB5E6;
+}  
+.icon-bars:before {
+  content: "\e90c";
+}
+.icon-bars {
+  color: #FFFFC9;
+}  
+.icon-bed:before {
+  content: "\e90d";
+}
+.icon-bells:before {
+  content: "\e90e";
+}
+.icon-bells {
+  color: #8CB5E6;
+}  
+.icon-binocs:before {
+  content: "\e90f";
+}
+.icon-binocs {
+  color: #8CB5E6;
+}  
+.icon-blimp:before {
+  content: "\e910";
+}
+.icon-blimp {
+  color: #8CB5E6;
+}  
+.icon-boat:before {
+  content: "\e911";
+}
+.icon-boat {
+  color: #8CB5E6;
+}  
+.icon-bobblehead:before {
+  content: "\e912";
+}
+.icon-bobblehead {
+  color: #A585F3;
+}
+.icon-bobblehead_full:before {
+  content: "\e913";
+}
+.icon-bobblehead_full {
+  color: #A585F3;
+}
+.icon-book:before {
+  content: "\e914";
+}
+.icon-book {
+  color: #A585F3;
+}
+.icon-bos:before {
+  content: "\e915";
+}
+.icon-bos {
+  color: #FF8B36;
+}
+.icon-bracket_left:before {
+  content: "\e916";
+}
+.icon-bracket_right:before {
+  content: "\e917";
+}
+.icon-brahmin:before {
+  content: "\e918";
+}
+.icon-brahmin {
+  color: #8CF385;
+}  
+.icon-bridge:before {
+  content: "\e919";
+}
+.icon-bridge {
+  color: #8CB5E6;
+}  
+.icon-bridge_large:before {
+  content: "\e91a";
+}
+.icon-bridge_large {
+  color: #8CB5E6;
+}  
+.icon-broadcast_tower:before {
+  content: "\e91b";
+}
+.icon-broadcast_tower {
+  color: #8CB5E6;
+}  
+.icon-building:before {
+  content: "\e91c";
+}
+.icon-building {
+  color: #8CB5E6;
+}  
+.icon-bunker:before {
+  content: "\e91d";
+}
+.icon-bunker {
+  color: #8CB5E6;
+}  
+.icon-bunker_ammo:before {
+  content: "\e91e";
+}
+.icon-business:before {
+  content: "\e91f";
+}
+.icon-business {
+  color: #8CB5E6;
+}  
+.icon-cabin:before {
+  content: "\e920";
+}
+.icon-cabin {
+  color: #8CB5E6;
+}  
+.icon-camp:before {
+  content: "\e921";
+}
+.icon-camp {
+  color: #8CB5E6;
+}  
+.icon-capitol:before {
+  content: "\e922";
+}
+.icon-capitol {
+  color: #8CB5E6;
+}  
+.icon-car:before {
+  content: "\e923";
+}
+.icon-car {
+  color: #8CB5E6;
+}  
+.icon-cave:before {
+  content: "\e924";
+}
+.icon-cave {
+  color: #8CB5E6;
+}  
+.icon-cemetery:before {
+  content: "\e925";
+}
+.icon-cemetery {
+  color: #8CB5E6;
+}  
+.icon-check:before {
+  content: "\e926";
+}
+.icon-check {
+  color: #A585F3;
+}
+.icon-church:before {
+  content: "\e927";
+}
+.icon-church {
+  color: #8CB5E6;
+}  
+.icon-city:before {
+  content: "\e929";
+}
+.icon-city {
+  color: #8CB5E6;
+}  
+.icon-city_ruins:before {
+  content: "\e92a";
+}
+.icon-city_ruins {
+  color: #8CB5E6;
+}  
+.icon-clover:before {
+  content: "\e92c";
+}
+.icon-cold:before {
+  content: "\e92d";
+}
+.icon-colonial:before {
+  content: "\e92e";
+}
+.icon-colonial {
+  color: #FF8B36;
+}
+.icon-creamery:before {
+  content: "\e92f";
+}
+.icon-creamery {
+  color: #8CB5E6;
+}  
+.icon-dam:before {
+  content: "\e930";
+}
+.icon-dam {
+  color: #8CB5E6;
+}  
+.icon-defense:before {
+  content: "\e931";
+}
+.icon-defense {
+  color: #FFFFC9;
+}  
+.icon-diamond:before {
+  content: "\e932";
+}
+.icon-diamond {
+  color: #8CB5E6;
+}  
+.icon-dock:before {
+  content: "\e933";
+}
+.icon-dock {
+  color: #8CB5E6;
+}  
+.icon-door:before {
+  content: "\e934";
+}
+.icon-drive-in:before {
+  content: "\e935";
+}
+.icon-drive-in {
+  color: #8CB5E6;
+}  
+.icon-electric:before {
+  content: "\e936";
+}
+.icon-emote:before {
+  content: "\e937";
+}
+.icon-enclave:before {
+  content: "\e938";
+}
+.icon-enclave {
+  color: #FF8B36;
+}
+.icon-entertainment:before {
+  content: "\e939";
+}
+.icon-entertainment {
+  color: #8CB5E6;
+}  
+.icon-event:before {
+  content: "\e93a";
+}
+.icon-event {
+  color: #F6D169;
+}  
+.icon-explosion:before {
+  content: "\e93b";
+}
+.icon-eye:before {
+  content: "\e9ce";
+}
+.icon-eye-blocked:before {
+  content: "\e9d1";
+}
+.icon-farm:before {
+  content: "\e93c";
+}
+.icon-farm {
+  color: #8CB5E6;
+}  
+.icon-fertilizer:before {
+  content: "\e93d";
+}
+.icon-fertilizer {
+  color: #FFFFC9;
+}  
+.icon-fissure:before {
+  content: "\e93e";
+}
+.icon-fissure {
+  color: #F8C95D;
+}  
+.icon-flames:before {
+  content: "\e93f";
+}
+.icon-food:before {
+  content: "\e940";
+}
+.icon-food {
+  color: #FFFFC9;
+}  
+.icon-food2:before {
+  content: "\e941";
+}
+.icon-fort:before {
+  content: "\e942";
+}
+.icon-fort {
+  color: #8CB5E6;
+}  
+.icon-free_states:before {
+  content: "\e943";
+}
+.icon-free_states {
+  color: #FF8B36;
+}
+.icon-fusion_core:before {
+  content: "\e944";
+}
+.icon-fusion_core {
+  color: #8CF385;
+}  
+.icon-garage:before {
+  content: "\e945";
+}
+.icon-garage {
+  color: #8CB5E6;
+}  
+.icon-gloves:before {
+  content: "\e946";
+}
+.icon-golf_greens:before {
+  content: "\e947";
+}
+.icon-golf_greens {
+  color: #8CB5E6;
+}  
+.icon-guage:before {
+  content: "\e948";
+}
+.icon-health:before {
+  content: "\e949";
+}
+.icon-heart:before {
+  content: "\e94a";
+}
+.icon-heart {
+  color: #A585F3;
+}
+.icon-helmet:before {
+  content: "\e94b";
+}
+.icon-holotape:before {
+  content: "\e94c";
+}
+.icon-holotape {
+  color: #A585F3;
+}
+.icon-hospital:before {
+  content: "\e94d";
+}
+.icon-hospital {
+  color: #8CB5E6;
+}  
+.icon-hostage:before {
+  content: "\e94e";
+}
+.icon-hostage {
+  color: #FF8B36;
+}
+.icon-industrial:before {
+  content: "\e94f";
+}
+.icon-industrial {
+  color: #8CB5E6;
+}  
+.icon-institute:before {
+  content: "\e950";
+}
+.icon-institute {
+  color: #8CB5E6;
+}  
+.icon-junk:before {
+  content: "\e951";
+}
+.icon-junk {
+  color: #FFFFC9;
+}  
+.icon-lamp:before {
+  content: "\e952";
+}
+.icon-lamp {
+  color: #8CB5E6;
+}  
+.icon-lighthouse:before {
+  content: "\e953";
+}
+.icon-lighthouse {
+  color: #8CB5E6;
+}  
+.icon-lookout_tower:before {
+  content: "\e954";
+}
+.icon-lookout_tower {
+  color: #8CB5E6;
+}  
+.icon-magazine:before {
+  content: "\e955";
+}
+.icon-magazine {
+  color: #A585F3;
+}
+.icon-magni:before {
+  content: "\e956";
+}
+.icon-magni {
+  color: #8CF385;
+}  
+.icon-mansion:before {
+  content: "\e957";
+}
+.icon-mansion {
+  color: #8CB5E6;
+}  
+.icon-marker:before {
+  content: "\e958";
+}
+.icon-medkit:before {
+  content: "\e959";
+}
+.icon-medkit {
+  color: #8CF385;
+}  
+.icon-mega_dig:before {
+  content: "\e95a";
+}
+.icon-mega_dig {
+  color: #8CB5E6;
+}  
+.icon-military:before {
+  content: "\e95b";
+}
+.icon-military {
+  color: #8CB5E6;
+}  
+.icon-mine_shaft:before {
+  content: "\e95c";
+}
+.icon-mine_shaft {
+  color: #8CB5E6;
+}  
+.icon-minutemen:before {
+  content: "\e95d";
+}
+.icon-monorail:before {
+  content: "\e95e";
+}
+.icon-monorail {
+  color: #8CB5E6;
+}  
+.icon-monster:before {
+  content: "\e95f";
+}
+.icon-monster {
+  color: #8CF385;
+}  
+.icon-monument:before {
+  content: "\e960";
+}
+.icon-monument {
+  color: #8CB5E6;
+}  
+.icon-mta:before {
+  content: "\e961";
+}
+.icon-mta {
+  color: #8CB5E6;
+}  
+.icon-mtns:before {
+  content: "\e962";
+}
+.icon-mtns {
+  color: #8CB5E6;
+}  
+.icon-nature:before {
+  content: "\e963";
+}
+.icon-nature {
+  color: #8CB5E6;
+}  
+.icon-npc:before {
+  content: "\e964";
+}
+.icon-npc {
+  color: #8CF385;
+}  
+.icon-nuclear:before {
+  content: "\e965";
+}
+.icon-nuclear {
+  color: #8CB5E6;
+}  
+.icon-nuclear_rads:before {
+  content: "\e966";
+}
+.icon-nuka_cherry:before {
+  content: "\e967";
+}
+.icon-nuka_cherry {
+  color: #E72A40;
+}  
+.icon-nuka_cola:before {
+  content: "\e9cc";
+}
+.icon-nuka_cola {
+  color: #A585F3;
+}
+.icon-nuka_plant:before {
+  content: "\e9cd";
+}
+.icon-nuka_plant {
+  color: #8CB5E6;
+}  
+.icon-nuka_quantum:before {
+  content: "\e9cf";
+}
+.icon-nuka_quantum {
+  color: #8AE5FD;
+}  
+.icon-nuke_launch:before {
+  content: "\e968";
+}
+.icon-obelisk:before {
+  content: "\e969";
+}
+.icon-obelisk {
+  color: #8CB5E6;
+}  
+.icon-objective:before {
+  content: "\e96a";
+}
+.icon-objective {
+  color: #F6D169;
+}  
+.icon-observatory:before {
+  content: "\e96b";
+}
+.icon-observatory {
+  color: #8CB5E6;
+}  
+.icon-ore:before {
+  content: "\e96c";
+}
+.icon-ore {
+  color: #FFFFC9;
+}  
+.icon-ore_aluminum:before {
+  content: "\e96d";
+}
+.icon-ore_aluminum {
+  color: #FFFFC9;
+}  
+.icon-ore_coal:before {
+  content: "\e96e";
+}
+.icon-ore_coal {
+  color: #FFFFC9;
+}  
+.icon-ore_copper:before {
+  content: "\e96f";
+}
+.icon-ore_copper {
+  color: #FFFFC9;
+}  
+.icon-ore_crystal:before {
+  content: "\e970";
+}
+.icon-ore_crystal {
+  color: #FFFFC9;
+}  
+.icon-ore_gold:before {
+  content: "\e971";
+}
+.icon-ore_gold {
+  color: #FFFFC9;
+}  
+.icon-ore_iron:before {
+  content: "\e972";
+}
+.icon-ore_iron {
+  color: #FFFFC9;
+}  
+.icon-ore_lead:before {
+  content: "\e973";
+}
+.icon-ore_lead {
+  color: #FFFFC9;
+}  
+.icon-ore_resin:before {
+  content: "\e974";
+}
+.icon-ore_resin {
+  color: #FFFFC9;
+}  
+.icon-ore_silver:before {
+  content: "\e975";
+}
+.icon-ore_silver {
+  color: #FFFFC9;
+}  
+.icon-ore_titanium:before {
+  content: "\e976";
+}
+.icon-ore_titanium {
+  color: #FFFFC9;
+}  
+.icon-ore_ultracite:before {
+  content: "\e977";
+}
+.icon-ore_ultracite {
+  color: #FFFFC9;
+}  
+.icon-ore_uranium:before {
+  content: "\e978";
+}
+.icon-ore_uranium {
+  color: #FFFFC9;
+}  
+.icon-palace:before {
+  content: "\e979";
+}
+.icon-palace {
+  color: #8CB5E6;
+}  
+.icon-park:before {
+  content: "\e97a";
+}
+.icon-park {
+  color: #8CB5E6;
+}  
+.icon-peelz:before {
+  content: "\e97b";
+}
+.icon-plan_armor:before {
+  content: "\e97c";
+}
+.icon-plan_armor {
+  color: #A585F3;
+}
+.icon-plan_camp:before {
+  content: "\e921";
+}
+.icon-plan_camp {
+  color: #A585F3;
+}
+.icon-plan_chem:before {
+  content: "\e97d";
+}
+.icon-plan_chem {
+  color: #A585F3;
+}
+.icon-plan_mod:before {
+  content: "\e97e";
+}
+.icon-plan_mod {
+  color: #A585F3;
+}
+.icon-plan_powerarmor_mod:before {
+  content: "\e97f";
+}
+.icon-plan_powerarmor_mod {
+  color: #A585F3;
+}
+.icon-plan_recipe:before {
+  content: "\e980";
+}
+.icon-plan_recipe {
+  color: #A585F3;
+}
+.icon-plan_workbench:before {
+  content: "\e981";
+}
+.icon-plan_workbench {
+  color: #A585F3;
+}
+.icon-plane:before {
+  content: "\e982";
+}
+.icon-plane {
+  color: #8CB5E6;
+}  
+.icon-plastic:before {
+  content: "\e983";
+}
+.icon-plastic {
+  color: #FFFFC9;
+}  
+.icon-point:before {
+  content: "\e984";
+}
+.icon-point {
+  color: #8CB5E6;
+}  
+.icon-police:before {
+  content: "\e985";
+}
+.icon-police {
+  color: #A585F3;
+}
+.icon-power_armor:before {
+  content: "\e986";
+}
+.icon-power_armor {
+  color: #8CF385;
+}  
+.icon-power_gen:before {
+  content: "\e987";
+}
+.icon-power_gen {
+  color: #FFFFC9;
+}  
+.icon-power_plant:before {
+  content: "\e988";
+}
+.icon-power_plant {
+  color: #8CB5E6;
+}  
+.icon-power_substation:before {
+  content: "\e989";
+}
+.icon-power_substation {
+  color: #8CB5E6;
+}  
+.icon-pumpkin:before {
+  content: "\e98a";
+}
+.icon-pumpkin {
+  color: #8CB5E6;
+}  
+.icon-raiders:before {
+  content: "\e98b";
+}
+.icon-raiders {
+  color: #8CB5E6;
+}  
+.icon-rail_tracks:before {
+  content: "\e98c";
+}
+.icon-rail_tracks {
+  color: #8CB5E6;
+}  
+.icon-railroad:before {
+  content: "\e98d";
+}
+.icon-railroad {
+  color: #8CB5E6;
+}  
+.icon-red_rocket:before {
+  content: "\e98e";
+}
+.icon-red_rocket {
+  color: #8CB5E6;
+}  
+.icon-resort:before {
+  content: "\e98f";
+}
+.icon-resort {
+  color: #8CB5E6;
+}  
+.icon-responders:before {
+  content: "\e990";
+}
+.icon-responders {
+  color: #FF8B36;
+}
+.icon-ruins_skyscraper:before {
+  content: "\e991";
+}
+.icon-ruins_skyscraper {
+  color: #8CB5E6;
+}  
+.icon-satellite:before {
+  content: "\e992";
+}
+.icon-satellite {
+  color: #8CB5E6;
+}  
+.icon-settlement:before {
+  content: "\e993";
+}
+.icon-settlement {
+  color: #8CB5E6;
+}  
+.icon-shack:before {
+  content: "\e994";
+}
+.icon-shack {
+  color: #8CB5E6;
+}  
+.icon-shield:before {
+  content: "\e995";
+}
+.icon-shield2:before {
+  content: "\e996";
+}
+.icon-ship:before {
+  content: "\e997";
+}
+.icon-ship {
+  color: #8CB5E6;
+}  
+.icon-shoppe:before {
+  content: "\e998";
+}
+.icon-shoppe {
+  color: #8CB5E6;
+}  
+.icon-signal:before {
+  content: "\e999";
+}
+.icon-signal {
+  color: #F8C95D;
+}  
+.icon-ski:before {
+  content: "\e99a";
+}
+.icon-ski {
+  color: #8CB5E6;
+}  
+.icon-space_station:before {
+  content: "\e99b";
+}
+.icon-space_station {
+  color: #8CB5E6;
+}  
+.icon-stacks:before {
+  content: "\e99c";
+}
+.icon-stacks {
+  color: #8CB5E6;
+}  
+.icon-star:before {
+  content: "\e99d";
+}
+.icon-star {
+  color: #8CF385;
+}  
+.icon-star_hollow:before {
+  content: "\e99e";
+}
+.icon-star_swoosh:before {
+  content: "\e99f";
+}
+.icon-statue:before {
+  content: "\e9a0";
+}
+.icon-statue {
+  color: #8CB5E6;
+}  
+.icon-stealth:before {
+  content: "\e9a1";
+}
+.icon-stealthboy:before {
+  content: "\e9a2";
+}
+.icon-stealthboy {
+  color: #8CF385;
+}  
+.icon-submarine:before {
+  content: "\e9a3";
+}
+.icon-submarine {
+  color: #8CB5E6;
+}  
+.icon-swamp:before {
+  content: "\e9a4";
+}
+.icon-swamp {
+  color: #8CB5E6;
+}  
+.icon-swan:before {
+  content: "\e9a5";
+}
+.icon-swan {
+  color: #8CB5E6;
+}  
+.icon-synth:before {
+  content: "\e9a6";
+}
+.icon-target:before {
+  content: "\e9a7";
+}
+.icon-target {
+  color: #8CF385;
+}  
+.icon-teamleader:before {
+  content: "\e9a8";
+}
+.icon-teapot:before {
+  content: "\e9a9";
+}
+.icon-teapot {
+  color: #8CB5E6;
+}  
+.icon-tower:before {
+  content: "\e9aa";
+}
+.icon-tower {
+  color: #8CB5E6;
+}  
+.icon-town:before {
+  content: "\e9ab";
+}
+.icon-town {
+  color: #8CB5E6;
+}  
+.icon-town_ruins:before {
+  content: "\e9ac";
+}
+.icon-town_ruins {
+  color: #8CB5E6;
+}  
+.icon-trailer:before {
+  content: "\e9ad";
+}
+.icon-trailer {
+  color: #8CB5E6;
+}  
+.icon-transit:before {
+  content: "\e9ae";
+}
+.icon-transit {
+  color: #8CB5E6;
+}  
+.icon-travel_trailer:before {
+  content: "\e9af";
+}
+.icon-travel_trailer {
+  color: #8CB5E6;
+}  
+.icon-vault-tec:before {
+  content: "\e9b0";
+}
+.icon-vault-tec {
+  color: #8CB5E6;
+}  
+.icon-vault_63:before {
+  content: "\e9b1";
+}
+.icon-vault_63 {
+  color: #F6D169;
+}  
+.icon-vault_76:before {
+  content: "\e9b2";
+}
+.icon-vault_76 {
+  color: #F6D169;
+}  
+.icon-vault_94:before {
+  content: "\e9b3";
+}
+.icon-vault_94 {
+  color: #F6D169;
+}  
+.icon-vault_96:before {
+  content: "\e9b4";
+}
+.icon-vault_96 {
+  color: #F6D169;
+}  
+.icon-vault_boy:before {
+  content: "\e9b5";
+}
+.icon-vendor:before {
+  content: "\e9b6";
+}
+.icon-vendor {
+  color: #8CF385;
+}  
+.icon-vial:before {
+  content: "\e9b7";
+}
+.icon-vial {
+  color: #FFFFC9;
+}  
+.icon-warehouse:before {
+  content: "\e9b8";
+}
+.icon-warehouse {
+  color: #8CB5E6;
+}  
+.icon-warning:before {
+  content: "\e9b9";
+}
+.icon-water:before {
+  content: "\e9ba";
+}
+.icon-water {
+  color: #FFFFC9;
+}  
+.icon-water_droplet:before {
+  content: "\e9bb";
+}
+.icon-water_droplet {
+  color: #FFFFC9;
+}  
+.icon-water_tower:before {
+  content: "\e9bc";
+}
+.icon-water_tower {
+  color: #8CB5E6;
+}  
+.icon-waterworks:before {
+  content: "\e9bd";
+}
+.icon-waterworks {
+  color: #8CB5E6;
+}  
+.icon-waypoint:before {
+  content: "\e9be";
+}
+.icon-waypoint {
+  color: #F6D169;
+}  
+.icon-weapon_24:before {
+  content: "\e9bf";
+}
+.icon-weapon_24 {
+  color: #8CF385;
+}  
+.icon-weapon_44:before {
+  content: "\e9c0";
+}
+.icon-weapon_48:before {
+  content: "\e9c1";
+}
+.icon-weapon_521:before {
+  content: "\e9c2";
+}
+.icon-weapon_521 {
+  color: #A585F3;
+}
+.icon-weapon_60:before {
+  content: "\e9c3";
+}
+.icon-weapon_60 {
+  color: #A585F3;
+}
+.icon-weapon_68:before {
+  content: "\e9c4";
+}
+.icon-weapon_70:before {
+  content: "\e9c5";
+}
+.icon-weapon_76:before {
+  content: "\e9c6";
+}
+.icon-weapon_78:before {
+  content: "\e9c7";
+}
+.icon-weight:before {
+  content: "\e9c8";
+}
+.icon-weight {
+  color: #FF8B36;
+}
+.icon-witch_hat:before {
+  content: "\e9c9";
+}
+.icon-witch_hat {
+  color: #8CB5E6;
+}  
+.icon-workbench:before {
+  content: "\e9ca";
+}
+.icon-workbench {
+  color: #8CF385;
+}  
+.icon-workshop:before {
+  content: "\e928";
+}
+.icon-workshop {
+  color: #F8C95D;
+}  
+.icon-x:before {
+  content: "\e92b";
+}
+.icon-x {
+  color: #8CF385;
+}
