@@ -53,9 +53,9 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
         $scope.definedLayers = {
             gameMap: {
                 name: 'Fallout76 MapTiles',
-                url: 'http://d1sv6jqpfm1rn8.cloudfront.net/{z}/{x}/{y}.png',
+                url: '/fallout76map/{z}/{x}/{y}.png',
                 layerParams:{
-                    errorTileUrl: 'https://s3-us-west-1.amazonaws.com/fallout76maptiles/emptyTile.png',
+                    errorTileUrl: '/emptyTile.png',
                     noWrap: true,
                     maxZoom:8,
                     minZoom:3
@@ -63,9 +63,9 @@ falloutApp.controller('mainController', ['$scope', 'leafletBoundsHelpers', 'leaf
                 type: 'xyz'
             },vector: {
                 name: 'Fallout76 Topo',
-                url: 'http://d1rl5aw7fz8q45.cloudfront.net/{z}/{x}/{y}.png',
+                url: '/fo76milmap/{z}/{x}/{y}.png',
                 layerParams:{
-                    errorTileUrl: 'https://s3-us-west-1.amazonaws.com/fallout76maptiles/emptyTile.png',
+                    errorTileUrl: '/emptyTile.png',
                     noWrap: true,
                     maxZoom:8,
                     minZoom:3
