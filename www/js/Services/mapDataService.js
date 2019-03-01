@@ -346,7 +346,7 @@ falloutApp.factory('mapDataService', ['$http', '$timeout', 'settings', '$rootSco
                 });
                 isInitialized = true;
 
-                poll();
+                //poll();
             },
             groupedPoints: pointsGrouped,
             points: pointsUngrouped,
